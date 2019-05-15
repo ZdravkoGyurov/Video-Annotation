@@ -3,6 +3,7 @@
         private $connection;
         private $table = 'user';
 
+        public $id;
         public $email;
         public $name;
         public $surname;
@@ -42,11 +43,12 @@
 
         public function updateUser() {
             $query = "UPDATE ". $this->table ." 
-                        SET email=:email, name=:name, surname=:surname, password=:password, role_id=:role_id
+                        SET id=:id, email=:email, name=:name, surname=:surname, password=:password, role_id=:role_id
                         WHERE email=:email";
 
             $statement = $this->connection->prepare($query);
 
+            $this->id = htmlspecialchars(strip_tags($this->id));
             $this->email = htmlspecialchars(strip_tags($this->email));
             $this->name = htmlspecialchars(strip_tags($this->name));
             $this->surname = htmlspecialchars(strip_tags($this->surname));
@@ -54,6 +56,7 @@
             $this->roleId = htmlspecialchars(strip_tags($this->roleId));
             $this->roleName = htmlspecialchars(strip_tags($this->roleName));
                                     
+            $statement->bindParam(":id", $this->id);
             $statement->bindParam(":email", $this->email);
             $statement->bindParam(":name", $this->name);
             $statement->bindParam(":surname", $this->surname);
@@ -69,7 +72,7 @@
         }
 
         public function findUserByEmail() {
-            $query = 'SELECT u.email, u.name, u.surname, u.password, u.role_id, r.name as role_name
+            $query = 'SELECT u.id, u.email, u.name, u.surname, u.password, u.role_id, r.name as role_name
             FROM role r JOIN ' . $this->table . ' u ON r.id = u.role_id WHERE u.email =:email';
 
             $statement = $this->connection->prepare($query);
@@ -80,6 +83,7 @@
 
             $row = $statement->fetch(PDO::FETCH_ASSOC);
 
+            $this->id = $row['id'];
             $this->email = $row['email'];
             $this->name = $row['name'];
             $this->surname = $row['surname'];
@@ -91,7 +95,7 @@
         }
 
         public function findAllUsers() {
-            $query = 'SELECT u.email, u.name, u.surname, u.password, u.role_id, r.name as role_name
+            $query = 'SELECT u.id, u.email, u.name, u.surname, u.password, u.role_id, r.name as role_name
             FROM role r JOIN ' . $this->table . ' u ON r.id = u.role_id';
 
             $statement = $this->connection->prepare($query);
