@@ -25,7 +25,6 @@
             $this->surname = htmlspecialchars(strip_tags($surname));
             $this->password = htmlspecialchars(strip_tags($password));
             $this->roleId = htmlspecialchars(strip_tags($roleId));
-            $this->roleName = htmlspecialchars(strip_tags($this->roleName));
                                     
             $statement->bindParam(":email", $this->email);
             $statement->bindParam(":name", $this->name);
@@ -54,7 +53,6 @@
             $this->surname = htmlspecialchars(strip_tags($surname));
             $this->password = htmlspecialchars(strip_tags($password));
             $this->roleId = htmlspecialchars(strip_tags($roleId));
-            $this->roleName = htmlspecialchars(strip_tags($this->roleName));
                                     
             $statement->bindParam(":id", $this->id);
             $statement->bindParam(":email", $this->email);

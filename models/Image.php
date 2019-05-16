@@ -73,7 +73,7 @@
         }
 
         public function findAllImagesByVideoName($videoName) {
-            $query = "SELECT i.id, i.path, i.name, i.type, i.timestamp, i.annotation, i.video_id , v.name
+            $query = "SELECT i.id, i.path, i.name, i.type, i.timestamp, i.annotation, i.video_id , v.name as video_name
                         FROM video v JOIN ". $this->table ." i ON v.id = i.video_id 
                         WHERE v.name = :video_name";
             
