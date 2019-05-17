@@ -35,6 +35,30 @@
                 return false;
             }
         }
+        
+        public function findVideoById($id) {
+            $query = "SELECT id, path, name, type, user_id 
+                        FROM ". $this->table ." 
+                        WHERE id=:id";
+
+            $statement = $this->connection->prepare($query);
+
+            $this->id = htmlspecialchars(strip_tags($id));
+
+            $statement->bindParam(":id", $this->id);
+
+            $statement->execute();
+
+            $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+            $this->id = $row['id'];
+            $this->path = $row['path'];
+            $this->name = $row['name'];
+            $this->type = $row['type'];
+            $this->userId = $row['user_id'];
+
+            return $this;
+        }
 
         public function findVideoByName($name) {
             $query = "SELECT id, path, name, type, user_id 

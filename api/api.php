@@ -13,9 +13,11 @@
     include_once 'user/delete.php';
     include_once 'user/findAll.php';
     
-    include_once 'subtitle/create.php';
     include_once 'subtitle/find.php';
     include_once 'subtitle/delete.php';
+
+    include_once 'video/delete.php';
+
 
     $database = new Database();
     $connection = $database->getConnection();
@@ -67,6 +69,12 @@
                 $user = new User($connection);
                 $subtitle = new Subtitle($connection);
                 deleteSubtitle($user, $subtitle, $segments[1]);
+            }
+        } else if($segments[0] == 'delete-video') {
+            if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+                $user = new User($connection);
+                $video = new Video($connection);
+                deleteVideo($user, $video, $segments[1]);
             }
         } else {
             $errors['pageNotFoundError'] = 'Page not found!';
