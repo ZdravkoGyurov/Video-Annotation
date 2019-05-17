@@ -7,16 +7,16 @@ NOT LOGGED IN
 •	Forgot password (Model ✔ | View ✖ | Controller ✔) 
 
 LOGGED IN AS USER   
-•	See all videos  
-•	See all user videos   
-•	Watch video   
-•	Edit user video   
-•	Log out   
+•	See all videos (Model ✔ | View ✖ | Controller ✖)  
+•	See all user videos (Model ✔ | View ✖ | Controller ✖)   
+•	Watch video (Model ✔ | View ✖ | Controller ✖)   
+•	Edit user video (Model ✔ | View ✖ | Controller ✖)   
+•	Log out (Model ✔ | View ✖ | Controller ✔)   
 
 LOGGED IN AS ADMIN  
-•	See all users   
-•	Delete user   
-•	See all videos  
-•	Watch video   
-•	Delete video  
-•	Log out   
+•	See all users (Model ✔ | View ✖ | Controller ✔)   
+•	Delete user (Model ✔ | View ✖ | Controller ✔)   
+•	See all videos (Model ✔ | View ✖ | Controller ✖)  
+•	Watch video (Model ✔ | View ✖ | Controller ✖)   
+•	Delete video (Model ✔ | View ✖ | Controller ✖)  
+•	Log out (Model ✔ | View ✖ | Controller ✔)   
