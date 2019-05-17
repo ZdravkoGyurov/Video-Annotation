@@ -2,9 +2,9 @@
 TODO:
 
 NOT LOGGED IN   
-•	Log in   
-•	Register  
-•	Forgot password 
+•	Log in (Model ✔ | View ✖ | Controller ✔)   
+•	Register (Model ✔ | View ✖ | Controller ✔)  
+•	Forgot password (Model ✔ | View ✖ | Controller ✔) 
 
 LOGGED IN AS USER   
 •	See all videos  
