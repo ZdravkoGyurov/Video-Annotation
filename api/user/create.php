@@ -11,7 +11,7 @@
 
         if(isset($data->email) && isset($data->name) && isset($data->surname) && isset($data->password) && isset($data->passwordRepeat)) {
             $errors = array();
-            // validate fields
+            
             // validate email
             // validate name
             // validate surname
