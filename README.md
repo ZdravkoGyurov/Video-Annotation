@@ -8,9 +8,9 @@ NOT LOGGED IN
 
 LOGGED IN AS USER   
 •	Upload video (Model ✔ | View ✖ | Controller ✖)   
-•	Show video (Model ✔ | View ✖ | Controller ✖)   
+•	Show video (Model ✔ | View ✖ | Controller ✔)   
 •	Show all user videos (Model ✔ | View ✖ | Controller ✖)   
-•	Show all videos (Model ✔ | View ✖ | Controller ✖)  
+•	Show all videos (Model ✔ | View ✖ | Controller ✔)  
 •	Edit user video (Model ✔ | View ✖ | Controller ✖)   
 •	Delete video (Model ✔ | View ✖ | Controller ✖)   
 •	Upload subtitle (Model ✔ | View ✖ | Controller ✖)   
@@ -26,6 +26,6 @@ LOGGED IN AS ADMIN
 •	Show all users (Model ✔ | View ✖ | Controller ✔)   
 •	Delete user (Model ✔ | View ✖ | Controller ✔)   
 •	Show all videos (Model ✔ | View ✖ | Controller ✔)  
-•	Show video (Model ✔ | View ✖ | Controller ✖)   
+•	Show video (Model ✔ | View ✖ | Controller ✔)   
 •	Delete video (Model ✔ | View ✖ | Controller ✔)  
 •	Log out (Model ✔ | View ✖ | Controller ✔)   
