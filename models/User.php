@@ -69,6 +69,7 @@
             }
         }
 
+        // not used
         public function findUserById($id) {
             $query = 'SELECT u.id, u.email, u.name, u.surname, u.password, u.role_id, r.name as role_name
             FROM role r JOIN ' . $this->table . ' u ON r.id = u.role_id WHERE u.id =:id';

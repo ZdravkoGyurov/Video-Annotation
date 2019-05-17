@@ -12,6 +12,10 @@
     include_once 'user/update.php';
     include_once 'user/delete.php';
     include_once 'user/findAll.php';
+    
+    include_once 'subtitle/create.php';
+    include_once 'subtitle/find.php';
+    include_once 'subtitle/delete.php';
 
     $database = new Database();
     $connection = $database->getConnection();
@@ -51,6 +55,12 @@
             if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
                 $user = new User($connection);
                 deleteUser($user, $segments[1]);
+            }
+        } else if($segments[0] == 'delete-subtitle') {
+            if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+                $user = new User($connection);
+                $subtitle = new Subtitle($connection);
+                deleteSubtitle($user, $subtitle, $segments[1]);
             }
         } else {
             $errors['pageNotFoundError'] = 'Page not found!';

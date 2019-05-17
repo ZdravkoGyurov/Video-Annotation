@@ -37,14 +37,14 @@
             }
         }
 
-        public function findSubtitleByVideoName($videoName) {
+        public function findSubtitleByVideoId($videoId) {
             $query = "SELECT s.id, s.path, s.name, s.type, s.video_id, v.name as video_name 
                         FROM video v JOIN ". $this->table ." s ON v.id = s.video_id
-                        WHERE v.name = :video_name";
+                        WHERE v.id = :id";
 
             $statement = $this->connection->prepare($query);
 
-            $statement->bindParam(":video_name", $videoName);
+            $statement->bindParam(":id", $videoId);
 
             $statement->execute();
 
