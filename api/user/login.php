@@ -24,15 +24,15 @@
                         'errors' => $errors
                     ));
                 } else if(password_verify($data->password, $user->password)) {
-                    if(isset($_COOKIE['loginInfo']) && !empty(isset($_COOKIE['loginInfo']))) {
+                    if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
                         $errors['loggedInError'] = 'You are already logged in!';
                         echo json_encode(array(
                             'errors' => $errors
                         ));
                     } else {
-                        setcookie('loginInfo', $user->email, time() + 3600, '/', NULL, TRUE, TRUE);
-                        $loginInfoToDisplay = $user->name . ' ' . $user->surname . '(' . $user->type . ')';
-                        setrawcookie('loginInfoToDisplay', $loginInfoToDisplay, time() + 3600, '/', NULL, TRUE, TRUE);
+                        setcookie('loggedUserEmail', $user->email, time() + 3600, '/', NULL, TRUE, TRUE);
+                        $loggedUserInfo = $user->name . ' ' . $user->surname . '(' . $user->roleName . ')';
+                        setrawcookie('loggedUserInfo', $loggedUserInfo, time() + 3600, '/', NULL, TRUE, TRUE);
     
                         echo json_encode($user, JSON_UNESCAPED_UNICODE);
                     }

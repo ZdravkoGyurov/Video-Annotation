@@ -3,10 +3,10 @@
     header('Content-Type: application/json');
 
     function logout($user) {
-        if(isset($_COOKIE['loginInfo']) && !empty(isset($_COOKIE['loginInfo']))) {
+        if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
             $errors = array();
 
-            $user->findUserByEmail($_COOKIE['loginInfo']);
+            $user->findUserByEmail($_COOKIE['loggedUserEmail']);
 
             if($user->roleName == 'Admin' || $user->roleName == 'User') {
                 setcookie('loggedUserEmail', '', time() - 3600, '/');
