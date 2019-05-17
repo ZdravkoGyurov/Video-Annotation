@@ -12,7 +12,7 @@ LOGGED IN AS USER
 •	Show all user videos (Model ✔ | View ✖ | Controller ✖)   
 •	Show all videos (Model ✔ | View ✖ | Controller ✔)  
 •	Edit user video (Model ✔ | View ✖ | Controller ✖)   
-•	Delete video (Model ✔ | View ✖ | Controller ✖)   
+•	Delete video (Model ✔ | View ✖ | Controller ✔)   
 •	Upload subtitle (Model ✔ | View ✖ | Controller ✖)   
 •	Show subtitle (Model ✔ | View ✖ | Controller ✔)   
 •	Delete subtitle (Model ✔ | View ✖ | Controller ✔)   
