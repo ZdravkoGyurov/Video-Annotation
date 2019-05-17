@@ -25,7 +25,7 @@ LOGGED IN AS USER
 LOGGED IN AS ADMIN  
 •	Show all users (Model ✔ | View ✖ | Controller ✔)   
 •	Delete user (Model ✔ | View ✖ | Controller ✔)   
-•	Show all videos (Model ✔ | View ✖ | Controller ✖)  
+•	Show all videos (Model ✔ | View ✖ | Controller ✔)  
 •	Show video (Model ✔ | View ✖ | Controller ✖)   
 •	Delete video (Model ✔ | View ✖ | Controller ✔)  
 •	Log out (Model ✔ | View ✖ | Controller ✔)   
