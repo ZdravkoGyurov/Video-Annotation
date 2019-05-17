@@ -23,9 +23,9 @@
                 define("name", $data->name);
                 define("surname", $data->surname);
                 define("password", password_hash($data->password, PASSWORD_DEFAULT));
-                define("roleUser", 2);
+                define("roleId", 2);
 
-                if($user->createUser(email, name, surname, password, roleUser)) {
+                if($user->createUser(email, name, surname, password, roleId)) {
                     echo json_encode($user, JSON_UNESCAPED_UNICODE);
                 } else {
                     $errors['userExistsError'] = 'That email address has already been used!';
