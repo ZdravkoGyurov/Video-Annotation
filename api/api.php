@@ -16,6 +16,7 @@
     include_once 'subtitle/find.php';
     include_once 'subtitle/delete.php';
 
+    include_once 'video/find.php';
     include_once 'video/findAll.php';
     include_once 'video/delete.php';
 
@@ -75,7 +76,12 @@
                 $subtitle = new Subtitle($connection);
                 deleteSubtitle($user, $subtitle, $segments[1]);
             }
-        } else if($segments[0] == 'delete-video') {
+        } else if($segments[0] == 'find-video') {
+            if($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $video = new Video($connection);
+                findVideo($video, $segments[1]);
+            }
+        }else if($segments[0] == 'delete-video') {
             if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
                 $user = new User($connection);
                 $video = new Video($connection);

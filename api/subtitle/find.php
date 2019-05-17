@@ -9,15 +9,23 @@
             $user->findUserByEmail($_COOKIE['loggedUserEmail']);
 
             if($user->roleName == 'User') {
-                $subtitle->findSubtitleByVideoId($videoId);
-                
-                if(!isset($subtitle->name)) {
-                    $errors['noSuchSubtitleFoundError'] = 'No subtitle with given video id found!';
+                // validate video id
+
+                if(empty($errors)) {
+                    $subtitle->findSubtitleByVideoId($videoId);
+                    
+                    if(!isset($subtitle->name)) {
+                        $errors['noSuchSubtitleFoundError'] = 'No subtitle with given video id found!';
+                        echo json_encode(array(
+                            'errors' => $errors
+                        ));
+                    } else {
+                        echo json_encode($subtitle, JSON_UNESCAPED_UNICODE);
+                    }
+                } else {        
                     echo json_encode(array(
                         'errors' => $errors
                     ));
-                } else {
-                    echo json_encode($subtitle, JSON_UNESCAPED_UNICODE);
                 }
             } else {
                 $errors['unauthorizedUserError'] = 'You are unauthorized!';
