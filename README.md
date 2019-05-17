@@ -9,7 +9,7 @@ NOT LOGGED IN
 LOGGED IN AS USER   
 •	Upload video (Model ✔ | View ✖ | Controller ✖)   
 •	Show video (Model ✔ | View ✖ | Controller ✔)   
-•	Show all user videos (Model ✔ | View ✖ | Controller ✖)   
+•	Show all user videos (Model ✔ | View ✖ | Controller ✔)   
 •	Show all videos (Model ✔ | View ✖ | Controller ✔)  
 •	Edit user video (Model ✔ | View ✖ | Controller ✖)   
 •	Delete video (Model ✔ | View ✖ | Controller ✔)   
