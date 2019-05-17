@@ -4,7 +4,7 @@
 
     function findAll($user) {
         $allUsers = $user->findAllusers();
-        $num = $allUsers->rowCount();
+        $numberOfUsers = $allUsers->rowCount();
 
         if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
             $errors = array();
@@ -12,7 +12,7 @@
             $user->findUserByEmail($_COOKIE['loggedUserEmail']);
 
             if($user->roleName == 'Admin') {
-                if($num > 0) {
+                if($numberOfUsers > 0) {
                     echo json_encode($allUsers->fetchAll(PDO::FETCH_ASSOC), JSON_UNESCAPED_UNICODE);
                 } else {
                     $errors['noUserFoundError'] = 'No users found!';
