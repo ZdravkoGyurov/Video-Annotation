@@ -56,6 +56,12 @@
                 $user = new User($connection);
                 deleteUser($user, $segments[1]);
             }
+        } else if($segments[0] == 'find-subtitle') {
+            if($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $user = new User($connection);
+                $subtitle = new Subtitle($connection);
+                findSubtitle($user, $subtitle, $segments[1]);
+            }
         } else if($segments[0] == 'delete-subtitle') {
             if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
                 $user = new User($connection);
