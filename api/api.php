@@ -16,8 +16,8 @@
     include_once 'subtitle/find.php';
     include_once 'subtitle/delete.php';
 
+    include_once 'video/findAll.php';
     include_once 'video/delete.php';
-
 
     $database = new Database();
     $connection = $database->getConnection();
@@ -49,7 +49,12 @@
     } else if($uriSegments[1] == 'all-users') {
         if($_SERVER['REQUEST_METHOD'] == 'GET') {
             $user = new User($connection);
-            findAll($user);
+            findAllUsers($user);
+        }
+    } else if($uriSegments[1] == 'all-videos') {
+        if($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $video = new Video($connection);
+            findAllVideos($video);
         }
     } else if(strpos($uriSegments[1], '/')) {
         $segments = explode('/', $uriSegments[1]);

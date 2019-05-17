@@ -2,16 +2,16 @@
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
 
-    function findAll($user) {
-        $allUsers = $user->findAllusers();
-        $numberOfUsers = $allUsers->rowCount();
-
+    function findAllUsers($user) {
         if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
             $errors = array();
-
+            
             $user->findUserByEmail($_COOKIE['loggedUserEmail']);
-
+            
             if($user->roleName == 'Admin') {
+                $allUsers = $user->findAllusers();
+                $numberOfUsers = $allUsers->rowCount();
+
                 if($numberOfUsers > 0) {
                     echo json_encode($allUsers->fetchAll(PDO::FETCH_ASSOC), JSON_UNESCAPED_UNICODE);
                 } else {
