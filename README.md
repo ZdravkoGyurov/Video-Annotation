@@ -33,4 +33,3 @@ LOGGED IN AS ADMIN
 WORK WITH IDs?  
 •	/delete-video    
 •	/find-video    
-•	/find-user-videos    
