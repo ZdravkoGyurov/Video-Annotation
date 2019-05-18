@@ -16,14 +16,14 @@
     include_once 'subtitle/find.php';
     include_once 'subtitle/delete.php';
 
+    include_once 'image/findByVideoNameAndTimestamp.php';
+    include_once 'image/findAllByVideoName.php';
+    include_once 'image/delete.php';
+
     include_once 'video/find.php';
     include_once 'video/findAllByUser.php';
     include_once 'video/findAll.php';
     include_once 'video/delete.php';
-
-    include_once 'image/findByVideoNameAndTimestamp.php';
-    include_once 'image/delete.php';
-
 
     $database = new Database();
     $connection = $database->getConnection();
@@ -64,10 +64,9 @@
         }
     } else if($uriSegments[1] == 'find-image') {
         if($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $user = new User($connection);
             $video = new Video($connection);
             $image = new Image($connection);
-            findByVideoNameAndTimestamp($user, $video, $image);
+            findByVideoNameAndTimestamp($video, $image);
         }
     } else if($uriSegments[1] == 'delete-image') {
         if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
@@ -111,6 +110,12 @@
                 $user = new User($connection);
                 $video = new Video($connection);
                 deleteVideo($user, $video, $segments[1]);
+            }
+        } else if($segments[0] == 'find-video-images') {
+            if($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $video = new Video($connection);
+                $image = new Image($connection);
+                findByVideoName($video, $image, $segments[1]);
             }
         } else {
             $errors['pageNotFoundError'] = 'Page not found!';
