@@ -18,7 +18,7 @@ LOGGED IN AS USER
 •	Delete subtitle (Model ✔ | View ✖ | Controller ✔)   
 •	Upload image (Model ✔ | View ✖ | Controller ✖)   
 •	Show image (Model ✔ | View ✖ | Controller ✔)   
-•	Show all images (Model ✔ | View ✖ | Controller ✖)   
+•	Show all video images (Model ✔ | View ✖ | Controller ✔)   
 •	Delete image (Model ✔ | View ✖ | Controller ✔)   
 •	Log out (Model ✔ | View ✖ | Controller ✔)   
 
