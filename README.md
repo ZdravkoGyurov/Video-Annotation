@@ -29,3 +29,10 @@ LOGGED IN AS ADMIN
 •	Show video (Model ✔ | View ✖ | Controller ✔)   
 •	Delete video (Model ✔ | View ✖ | Controller ✔)  
 •	Log out (Model ✔ | View ✖ | Controller ✔)   
+
+WORK WITH IDs?  
+•	/delete-subtitle   
+•	/find-subtitle   
+•	/delete-video    
+•	/find-video    
+•	/find-user-videos    
