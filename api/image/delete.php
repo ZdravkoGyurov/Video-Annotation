@@ -23,18 +23,25 @@
                         $video->findVideoById($data->videoId);
                         $image->findImageByVideoNameAndTimestamp($video->name, $data->timestamp);
 
-                        if(!isset($image->name)) {
-                            $errors['noSuchImageFoundError'] = 'No image with given video id and timestamp found!';
+                        if(!isset($video->name)) {
+                            $errors['noSuchVideoFoundError'] = 'No video with given id found!';
                             echo json_encode(array(
                                 'errors' => $errors
                             ));
-                        } else if($image->deleteImage($data->videoId, $data->timestamp)) {
-                            echo json_encode($image, JSON_UNESCAPED_UNICODE);
                         } else {
-                            $errors['unableToDeleteImageError'] = 'Image could not be deleted!';
-                            echo json_encode(array(
-                                'errors' => $errors
-                            ));
+                            if(!isset($image->name)) {
+                                $errors['noSuchImageFoundError'] = 'No image with given video id and timestamp found!';
+                                echo json_encode(array(
+                                    'errors' => $errors
+                                ));
+                            } else if($image->deleteImage($data->videoId, $data->timestamp)) {
+                                echo json_encode($image, JSON_UNESCAPED_UNICODE);
+                            } else {
+                                $errors['unableToDeleteImageError'] = 'Image could not be deleted!';
+                                echo json_encode(array(
+                                    'errors' => $errors
+                                ));
+                            }
                         }
                     } else {                
                     echo json_encode(array(
