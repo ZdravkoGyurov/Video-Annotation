@@ -6,20 +6,20 @@
     'Access-Control-Allow-Headers, Content-Type, '.
     'Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
-    function deleteVideo($user, $video, $id) {
+    function deleteVideo($user, $video, $name) {
         if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
             $errors = array();
 
             $user->findUserByEmail($_COOKIE['loggedUserEmail']);
 
             if($user->roleName == 'Admin') {
-                // validate videoid
+                // validate name
 
                 if(empty($errors)) {
-                    $video->findVideoById($id);
+                    $video->findVideoByName($name);
 
                     if(!isset($video->name)) {
-                        $errors['noSuchVideoFoundError'] = 'No video with given id found!';
+                        $errors['noSuchVideoFoundError'] = 'No video with given name found!';
                         echo json_encode(array(
                             'errors' => $errors
                         ));
