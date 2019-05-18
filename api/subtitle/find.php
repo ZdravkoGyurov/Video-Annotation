@@ -2,33 +2,33 @@
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
 
-    function findSubtitle($user, $subtitle, $videoId) {
+    function findSubtitle($video, $subtitle, $videoName) {
         if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
             $errors = array();
 
-            $user->findUserByEmail($_COOKIE['loggedUserEmail']);
+            // validate videoName
 
-            if($user->roleName == 'User') {
-                // validate video id
+            if(empty($errors)) {
+                $video->findVideoByName($videoName);
 
-                if(empty($errors)) {
-                    $subtitle->findSubtitleByVideoId($videoId);
+                if(!isset($video->name)) {
+                    $errors['noSuchVideoFoundError'] = 'No video with given name found!';
+                    echo json_encode(array(
+                        'errors' => $errors
+                    ));
+                } else {
+                    $subtitle->findSubtitleByVideoId($video->id);
                     
                     if(!isset($subtitle->name)) {
-                        $errors['noSuchSubtitleFoundError'] = 'No subtitle with given video id found!';
+                        $errors['noSuchSubtitleFoundError'] = 'No subtitle with given video name found!';
                         echo json_encode(array(
                             'errors' => $errors
                         ));
                     } else {
                         echo json_encode($subtitle, JSON_UNESCAPED_UNICODE);
                     }
-                } else {        
-                    echo json_encode(array(
-                        'errors' => $errors
-                    ));
                 }
-            } else {
-                $errors['unauthorizedUserError'] = 'You are unauthorized!';
+            } else {        
                 echo json_encode(array(
                     'errors' => $errors
                 ));

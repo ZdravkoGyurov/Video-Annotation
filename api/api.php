@@ -84,9 +84,9 @@
             }
         } else if($segments[0] == 'find-subtitle') {
             if($_SERVER['REQUEST_METHOD'] == 'GET') {
-                $user = new User($connection);
+                $video = new Video($connection);
                 $subtitle = new Subtitle($connection);
-                findSubtitle($user, $subtitle, $segments[1]);
+                findSubtitle($video, $subtitle, $segments[1]);
             }
         } else if($segments[0] == 'delete-subtitle') {
             if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
