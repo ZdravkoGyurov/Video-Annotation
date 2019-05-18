@@ -31,7 +31,6 @@ LOGGED IN AS ADMIN
 •	Log out (Model ✔ | View ✖ | Controller ✔)   
 
 WORK WITH IDs?  
-•	/find-subtitle   
 •	/delete-video    
 •	/find-video    
 •	/find-user-videos    
