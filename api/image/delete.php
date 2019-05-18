@@ -51,9 +51,9 @@
                             }
                         }
                     } else {                
-                    echo json_encode(array(
-                        'errors' => $errors
-                    ));
+                        echo json_encode(array(
+                            'errors' => $errors
+                        ));
                     }
                 } else {
                     $errors['unauthorizedUserError'] = 'You are unauthorized!';
@@ -62,7 +62,7 @@
                     ));
                 }
             } else {
-                $errors['noAdminError'] = 'You need to be logged in as User to delete images!';
+                $errors['noUserError'] = 'You need to be logged in as User to delete images!';
                 echo json_encode(array(
                     'errors' => $errors
                 ));

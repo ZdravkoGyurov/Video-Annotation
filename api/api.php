@@ -21,6 +21,10 @@
     include_once 'video/findAll.php';
     include_once 'video/delete.php';
 
+    include_once 'image/findByVideoNameAndTimestamp.php';
+    include_once 'image/delete.php';
+
+
     $database = new Database();
     $connection = $database->getConnection();
 
@@ -57,6 +61,20 @@
         if($_SERVER['REQUEST_METHOD'] == 'GET') {
             $video = new Video($connection);
             findAllVideos($video);
+        }
+    } else if($uriSegments[1] == 'find-image') {
+        if($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $user = new User($connection);
+            $video = new Video($connection);
+            $image = new Image($connection);
+            findByVideoNameAndTimestamp($user, $video, $image);
+        }
+    } else if($uriSegments[1] == 'delete-image') {
+        if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+            $user = new User($connection);
+            $video = new Video($connection);
+            $image = new Image($connection);
+            deleteImage($user, $video, $image);
         }
     } else if(strpos($uriSegments[1], '/')) {
         $segments = explode('/', $uriSegments[1]);
