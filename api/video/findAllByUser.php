@@ -2,26 +2,35 @@
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
 
-    function findAllUserVideos($user, $video, $userId) {
+    function findAllUserVideos($user, $video, $userEmail) {
         if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
             $errors = array();
 
             $user->findUserByEmail($_COOKIE['loggedUserEmail']);
 
             if($user->roleName == 'User') {
-                // validate userId
+                // validate userEmail
                 
                 if(empty($errors)) {
-                    $allVideos = $video->findAllVideosByUserId($userId);
-                    $numberOfVideos = $allVideos->rowCount();
+                    $user->findUserByEmail($userEmail);
 
-                    if($numberOfVideos > 0) {
-                        echo json_encode($allVideos->fetchAll(PDO::FETCH_ASSOC), JSON_UNESCAPED_UNICODE);
-                    } else {
-                        $errors['noVideoFoundError'] = 'No videos found!';
+                    if(!isset($user->name)) {
+                        $errors['noSuchUserFoundError'] = 'No user with given email found!';
                         echo json_encode(array(
                             'errors' => $errors
                         ));
+                    } else {
+                        $allVideos = $video->findAllVideosByUserId($user->id);
+                        $numberOfVideos = $allVideos->rowCount();
+    
+                        if($numberOfVideos > 0) {
+                            echo json_encode($allVideos->fetchAll(PDO::FETCH_ASSOC), JSON_UNESCAPED_UNICODE);
+                        } else {
+                            $errors['noVideoFoundError'] = 'No videos found!';
+                            echo json_encode(array(
+                                'errors' => $errors
+                            ));
+                        }
                     }
                 } else {                
                     echo json_encode(array(
