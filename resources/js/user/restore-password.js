@@ -1,23 +1,21 @@
-var form = document.getElementById("registerForm");
+var form = document.getElementById("restorePasswordForm");
 
-form.addEventListener("submit", submitRegisterForm);
+form.addEventListener("submit", submitRestorePasswordForm);
 
-function submitRegisterForm() {
+function submitRestorePasswordForm() {
     event.preventDefault();
 
     var email = document.getElementById('email').value;
-    var name = document.getElementById('name').value;
-    var surname = document.getElementById('surname').value;
     var password = document.getElementById('password').value;
     var passwordRepeat = document.getElementById('passwordRepeat').value;
-    var formData = JSON.stringify({email:email, name:name, surname:surname, password:password, passwordRepeat:passwordRepeat});
+    var formData = JSON.stringify({email:email, password:password, passwordRepeat:passwordRepeat});
 
     // validate fields
 
     if(true) { // no errors
         $.ajax({
             type: "POST",
-            url: "../../api/api.php/register",
+            url: "../../api/api.php/update-password",
             dataType: "json",
             data: formData,
             success: function(response) {
