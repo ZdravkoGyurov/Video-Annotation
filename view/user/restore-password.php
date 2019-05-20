@@ -15,4 +15,5 @@
 
     <input type="submit" value="Restore">
 </form>
+<script type="text/javascript" src="../../resources/js/user/restore-password.js"></script>
 <?php include '../common/footer.html' ?>
