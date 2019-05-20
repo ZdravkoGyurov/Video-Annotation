@@ -10,7 +10,7 @@
     <label for="name">Name</label>
     <input id="name" type="text" placeholder="Name">
 
-    <label for="name">Surname</label>
+    <label for="surname">Surname</label>
     <input id="surname" type="text" placeholder="Surname">
 
     <label for="password">Password</label>
@@ -23,4 +23,5 @@
 
     <input type="submit" value="Register">
 </form>
+<script type="text/javascript" src="../../resources/js/user/register.js"></script>
 <?php include '../common/footer.html' ?>
