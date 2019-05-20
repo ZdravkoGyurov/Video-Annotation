@@ -22,8 +22,8 @@
                 if(isset($user->name)) {
                     define('id', $user->id);
                     define('email', $user->email);
-                    define("name", $data->name);
-                    define("surname", $data->surname);
+                    define("name", $user->name);
+                    define("surname", $user->surname);
                     define("password", password_hash($data->password, PASSWORD_DEFAULT));
                     define("roleId", 2);
     
