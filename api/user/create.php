@@ -9,7 +9,7 @@
     function register($user) {
         $data = json_decode(file_get_contents('php://input'));
 
-        if(isset($data->email) && isset($data->name) && isset($data->surname) && isset($data->password) && isset($data->passwordRepeat)) {
+        if($data->email != '' && $data->name != '' && $data->surname != '' && $data->password != '' && $data->passwordRepeat != '') {
             $errors = array();
             
             // validate email
