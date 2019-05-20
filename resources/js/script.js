@@ -47,7 +47,9 @@ function showCorrectHeader() {
 }
 
 var logoutBtn = decodeURIComponent(getCookie('loggedUserRole')) == "Admin" ? document.getElementById("logout-btn3") : document.getElementById("logout-btn2");
-logoutBtn.addEventListener("click", submitLogoutForm);
+if(logoutBtn) {
+    logoutBtn.addEventListener("click", submitLogoutForm);
+}
 
 function submitLogoutForm() {
     event.preventDefault();
@@ -57,7 +59,7 @@ function submitLogoutForm() {
         url: "../../api/api.php/logout",
         success: function(response) {
             console.log(response);
-            location.reload();
+            location.replace("../user/login.php");
         },
         error: function(response) {
             console.log(response);
