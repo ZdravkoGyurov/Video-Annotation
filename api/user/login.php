@@ -9,7 +9,7 @@
     function login($user) {
         $data = json_decode(file_get_contents('php://input'));
         
-        if(isset($data->email) && isset($data->password)) {
+        if($data->email != '' && $data->password != '') {
             $errors = array();
 
             // validate email
@@ -30,9 +30,11 @@
                             'errors' => $errors
                         ));
                     } else {
-                        setcookie('loggedUserEmail', $user->email, time() + 3600, '/', NULL, TRUE, TRUE);
-                        $loggedUserInfo = $user->name . ' ' . $user->surname . '(' . $user->roleName . ')';
-                        setrawcookie('loggedUserInfo', $loggedUserInfo, time() + 3600, '/', NULL, TRUE, TRUE);
+                        setcookie('loggedUserEmail', $user->email, time() + 3600, '/', NULL, NULL, TRUE);
+                        $loggedUserName = $user->name. ' ' .$user->surname;
+                        $loggedUserRole = $user->roleName;
+                        setcookie('loggedUserName', $loggedUserName, time() + 3600, '/');
+                        setcookie('loggedUserRole', $loggedUserRole, time() + 3600, '/');
     
                         echo json_encode($user, JSON_UNESCAPED_UNICODE);
                     }

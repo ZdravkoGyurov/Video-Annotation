@@ -10,7 +10,8 @@
 
             if($user->roleName == 'Admin' || $user->roleName == 'User') {
                 setcookie('loggedUserEmail', '', time() - 3600, '/');
-                setcookie('loggedUserInfo', '', time() - 3600, '/');
+                setcookie('loggedUserName', '', time() - 3600, '/');
+                setcookie('loggedUserRole', '', time() - 3600, '/');
 
                 echo json_encode($user, JSON_UNESCAPED_UNICODE);
             } else {
