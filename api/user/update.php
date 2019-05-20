@@ -9,7 +9,7 @@
     function updatePassword($user) {
         $data = json_decode(file_get_contents('php://input'));
 
-        if(isset($data->email) && isset($data->password) && isset($data->passwordRepeat)) {
+        if($data->email != '' && $data->password != '' && $data->passwordRepeat != '') {
             $errors = array();
 
             // validate email
