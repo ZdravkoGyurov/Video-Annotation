@@ -1,4 +1,4 @@
-<?php $pageTitle = "VA | Restore password" ?>
+<?php $pageTitle = "VA | All videos" ?>
 <?php include '../common/header.html' ?>
 <link rel="stylesheet" href="../../resources/css/all-videos.css">
 <h1>All videos</h1>
