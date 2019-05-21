@@ -14,7 +14,7 @@ function showAllUsers() {
                 var value = response.data[key];
 
                 var item = document.createElement('li');
-                item.appendChild(document.createTextNode(value.id + " " + value.email + " " + value.name + " " + value.surname + " " + value.roleName));
+                item.appendChild(document.createTextNode("ID: " + value.id + " | Email: " + value.email + " | Name: " + value.name + " " + value.surname + "(" + value.roleName + ")"));
                 list.appendChild(item);
 
                 var btn = document.createElement('button');
@@ -26,8 +26,9 @@ function showAllUsers() {
                             removeUser(e.target.getAttribute("email"));
                         }
                     });
-                list.appendChild(btn);
+                item.appendChild(btn);
             }
+            console.log(response);
         },
         error: function(response) {
             console.log(response);
