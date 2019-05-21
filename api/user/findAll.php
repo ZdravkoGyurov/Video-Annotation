@@ -13,7 +13,22 @@
                 $numberOfUsers = $allUsers->rowCount();
 
                 if($numberOfUsers > 0) {
-                    echo json_encode($allUsers->fetchAll(PDO::FETCH_ASSOC), JSON_UNESCAPED_UNICODE);
+                    $usersArr = array();
+                    $usersArr['data'] = array();
+
+                    while($row = $allUsers->fetch(PDO::FETCH_ASSOC)) {
+                        $userItem = array(
+                            'id' => $row['id'],
+                            'email' => $row['email'],
+                            'name' => $row['name'],
+                            'surname' => $row['surname'],
+                            'password' => $row['password'],
+                            'roleId' => $row['role_id'],
+                            'roleName' => $row['role_name']
+                        );
+                        array_push($usersArr['data'], $userItem);
+                    }
+                    echo json_encode($usersArr, JSON_UNESCAPED_UNICODE);
                 } else {
                     $errors['noUserFoundError'] = 'No users found!';
                     echo json_encode(array(
