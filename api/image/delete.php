@@ -16,8 +16,8 @@
                 $user->findUserByEmail($_COOKIE['loggedUserEmail']);
 
                 if($user->roleName == 'User') {
-                    // validate videoId
-                    // validate timestamp
+                    Validator::validateVideoId($data->videoId, $errors);
+                    Validator::validateVideoTimestamp($data->timestamp, $errors);
 
                     if(empty($errors)) {
                         $video->findVideoById($data->videoId);

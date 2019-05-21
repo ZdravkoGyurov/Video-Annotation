@@ -6,7 +6,7 @@
         if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
             $errors = array();
 
-            // validate videoName
+            Validator::validateVideoName($videoName, $errors);
 
             if(empty($errors)) {
                 $video->findVideoByName($videoName);
