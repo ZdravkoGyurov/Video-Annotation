@@ -13,7 +13,7 @@
             $user->findUserByEmail($_COOKIE['loggedUserEmail']);
 
             if($user->roleName == 'Admin') {
-                // validate name
+                Validator::validateVideoName($name, $errors);
 
                 if(empty($errors)) {
                     $video->findVideoByName($name);
