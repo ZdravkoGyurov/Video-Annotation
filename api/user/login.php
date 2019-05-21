@@ -30,7 +30,7 @@
                             'errors' => $errors
                         ));
                     } else {
-                        setcookie('loggedUserEmail', $user->email, time() + 3600, '/', NULL, NULL, TRUE);
+                        setcookie('loggedUserEmail', $user->email, time() + 3600, '/');
                         $loggedUserName = $user->name. ' ' .$user->surname;
                         $loggedUserRole = $user->roleName;
                         setcookie('loggedUserName', $loggedUserName, time() + 3600, '/');
