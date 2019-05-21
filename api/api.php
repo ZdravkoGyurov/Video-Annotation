@@ -1,6 +1,8 @@
 <?php
     include_once '../config/Database.php';
 
+    include_once '../validate/Validator.php';
+
     include_once '../models/User.php';
     include_once '../models/Video.php';
     include_once '../models/Image.php';

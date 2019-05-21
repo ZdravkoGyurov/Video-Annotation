@@ -12,9 +12,10 @@
         if($data->email != '' && $data->password != '' && $data->passwordRepeat != '') {
             $errors = array();
 
-            // validate email
-            // validate password
-            // validate passwordRepeat
+            Validator::validateEmail($data->email, $errors);
+            Validator::validatePassword($data->password, $errors);
+            Validator::validatePasswordRepeat($data->passwordRepeat, $errors);
+            Validator::validatePasswordMatch($data->passwordRepeat, $errors);
 
             if(empty($errors)) {
                 $user->findUserByEmail($data->email);

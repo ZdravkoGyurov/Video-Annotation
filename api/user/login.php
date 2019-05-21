@@ -12,8 +12,8 @@
         if($data->email != '' && $data->password != '') {
             $errors = array();
 
-            // validate email
-            // validate password
+            Validator::validateEmail($data->email, $errors);
+            Validator::validatePassword($data->password, $errors);
 
             if(empty($errors)) {
                 $user->findUserByEmail($data->email);

@@ -13,7 +13,7 @@
             $user->findUserByEmail($_COOKIE['loggedUserEmail']);
 
             if($user->roleName == 'Admin') {
-                // validate email
+                Validator::validateEmail($_COOKIE['loggedUserEmail'], $errors);
 
                 if(empty($errors)) {
                     $user->findUserByEmail($email);

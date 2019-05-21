@@ -12,11 +12,12 @@
         if($data->email != '' && $data->name != '' && $data->surname != '' && $data->password != '' && $data->passwordRepeat != '') {
             $errors = array();
             
-            // validate email
-            // validate name
-            // validate surname
-            // validate password
-            // validate passwordRepeat
+            Validator::validateEmail($data->email, $errors);
+            Validator::validateName($data->name, $errors);
+            Validator::validateSurname($data->surname, $errors);
+            Validator::validatePassword($data->password, $errors);
+            Validator::validatePasswordRepeat($data->passwordRepeat, $errors);
+            Validator::validatePasswordMatch($data->passwordRepeat, $errors);
 
             if(empty($errors)) {
                 define("email", $data->email);
