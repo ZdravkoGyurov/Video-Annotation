@@ -18,11 +18,12 @@ function showAllUsers() {
                 list.appendChild(item);
 
                 var btn = document.createElement('button');
-                    btn.id = "btn-" + value.id;
+                    btn.id = "btn-" + value.email;
                     btn.innerHTML = "Delete";
                     btn.addEventListener("click", function(e)  {
                         if(e.target && e.target.id.startsWith("btn-")) {
-                            log(e.target.id.replace('btn-',''));
+                            // alert(e.target.id.replace('btn-',''));
+                            removeUser(e.target.id.replace('btn-',''));
                         }
                     });
                 list.appendChild(btn);
@@ -34,6 +35,20 @@ function showAllUsers() {
     });
 };
 
-function log(num) {
-    console.log(num);
-}
+function removeUser(email) {
+    event.preventDefault();
+
+    var url = "../../api/api.php/delete-user/" + email;
+
+    $.ajax({
+        type: "DELETE",
+        url: url,
+        success: function(response) {
+            console.log(response);
+            location.reload();
+        },
+        error: function(response) {
+            console.log(response);
+        }
+    });
+};
