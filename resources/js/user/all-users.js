@@ -18,11 +18,12 @@ function showAllUsers() {
                 list.appendChild(item);
 
                 var btn = document.createElement('button');
-                    btn.id = "btn-" + value.email;
+                    btn.id = "btn-" + value.id;
                     btn.innerHTML = "Delete";
+                    btn.setAttribute("email", value.email)
                     btn.addEventListener("click", function(e)  {
                         if(e.target && e.target.id.startsWith("btn-")) {
-                            removeUser(e.target.id.replace('btn-',''));
+                            removeUser(e.target.getAttribute("email"));
                         }
                     });
                 list.appendChild(btn);
