@@ -18,11 +18,15 @@ function submitLoginForm() {
             dataType: "json",
             data: formData,
             success: function(response) {
-                console.log(response);
-                location.reload();
-                // location.replace("../video/all.php");
+                if(response.errors) {
+                    console.log(response.errors);
+                } else {
+                    location.replace("../video/all-videos.php");
+                }
+                // console.log(response.roleId);
             },
             error: function(response) {
+                location.reload();
                 console.log(response);
             }
         });
