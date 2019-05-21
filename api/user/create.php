@@ -17,7 +17,7 @@
             Validator::validateSurname($data->surname, $errors);
             Validator::validatePassword($data->password, $errors);
             Validator::validatePasswordRepeat($data->passwordRepeat, $errors);
-            Validator::validatePasswordMatch($data->passwordRepeat, $errors);
+            Validator::validatePasswordMatch($data->password, $data->passwordRepeat, $errors);
 
             if(empty($errors)) {
                 define("email", $data->email);
