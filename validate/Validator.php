@@ -49,4 +49,16 @@
                 $errors['videoNameError'] = 'Video can contain only letters and numbers';
             }
         }
+
+        public static function validateVideoId($videoId, &$errors) {
+            if(!is_numeric($videoId)) {
+                $errors['videoIdError'] = 'Video id can contain only numbers';
+            }
+        }
+
+        public static function validateVideoTimestamp($timestamp, &$errors) {
+            if(!is_numeric($timestamp)) {
+                $errors['videoTimestampError'] = 'Timestamp can contain only numbers';
+            }
+        }
     }
