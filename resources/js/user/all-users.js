@@ -22,7 +22,6 @@ function showAllUsers() {
                     btn.innerHTML = "Delete";
                     btn.addEventListener("click", function(e)  {
                         if(e.target && e.target.id.startsWith("btn-")) {
-                            // alert(e.target.id.replace('btn-',''));
                             removeUser(e.target.id.replace('btn-',''));
                         }
                     });
