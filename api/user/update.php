@@ -15,7 +15,7 @@
             Validator::validateEmail($data->email, $errors);
             Validator::validatePassword($data->password, $errors);
             Validator::validatePasswordRepeat($data->passwordRepeat, $errors);
-            Validator::validatePasswordMatch($data->passwordRepeat, $errors);
+            Validator::validatePasswordMatch($data->password, $data->passwordRepeat, $errors);
 
             if(empty($errors)) {
                 $user->findUserByEmail($data->email);
