@@ -27,7 +27,11 @@ function showYourVideos() {
                 var value = response.data[key];
 
                 var item = document.createElement('li');
-                item.appendChild(document.createTextNode(value.name));
+                var link = document.createElement('a');
+                link.appendChild(document.createTextNode(value.name));
+                link.href = "../video/view-video.php?videoName=" + value.name;
+                link.className = "video-link";
+                item.appendChild(link);
                 list.appendChild(item);
 
                 var btn = document.createElement('button');
