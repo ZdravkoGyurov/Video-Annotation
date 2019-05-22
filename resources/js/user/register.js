@@ -21,7 +21,11 @@ function submitRegisterForm() {
             dataType: "json",
             data: formData,
             success: function(response) {
-                console.log(response);
+                if(response.errors) {
+                    console.log(response.errors);
+                } else {
+                    location.replace("../user/login.php?register=true");
+                }
             },
             error: function(response) {
                 console.log(response);

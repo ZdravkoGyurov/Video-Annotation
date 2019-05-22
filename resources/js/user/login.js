@@ -23,7 +23,6 @@ function submitLoginForm() {
                 } else {
                     location.replace("../video/all-videos.php");
                 }
-                // console.log(response.roleId);
             },
             error: function(response) {
                 location.reload();
@@ -32,3 +31,24 @@ function submitLoginForm() {
         });
     }
 };
+
+document.addEventListener("DOMContentLoaded", function(){
+    var urlString = window.location.href;
+    var url = new URL(urlString);
+    var register = url.searchParams.get("register");
+    var restore = url.searchParams.get("restore");
+    console.log(register);
+    console.log(restore);
+
+    if(register) {
+        var successMessage = document.createElement('p');
+        successMessage.id = "success-message";
+        successMessage.innerHTML = "Registration successful!";
+        document.getElementsByTagName("h1")[0].prepend(successMessage);
+    } else if(restore) {
+        var successMessage = document.createElement('p');
+        successMessage.id = "success-message";
+        successMessage.innerHTML = "Password restoration successful!";
+        document.getElementsByTagName("h1")[0].prepend(successMessage);
+    }
+});

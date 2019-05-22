@@ -19,7 +19,11 @@ function submitRestorePasswordForm() {
             dataType: "json",
             data: formData,
             success: function(response) {
-                console.log(response);
+                if(response.errors) {
+                    console.log(response.errors);
+                } else {
+                    location.replace("../user/login.php?restore=true");
+                }
             },
             error: function(response) {
                 console.log(response);
