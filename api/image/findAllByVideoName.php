@@ -21,7 +21,23 @@
                     $numberOfImages = $allImages->rowCount();
 
                     if($numberOfImages > 0) {
-                        echo json_encode($allImages->fetchAll(PDO::FETCH_ASSOC), JSON_UNESCAPED_UNICODE);
+                        $imagesArr = array();
+                        $imagesArr['data'] = array();
+
+                        while($row = $allImages->fetch(PDO::FETCH_ASSOC)) {
+                            $imageItem = array(
+                                'id' => $row['id'],
+                                'path' => $row['path'],
+                                'name' => $row['name'],
+                                'type' => $row['type'],
+                                'timestamp' => $row['timestamp'],
+                                'annotation' => $row['annotation'],
+                                'videoId' => $row['video_id'],
+                                'videoName' => $row['video_name']
+                            );
+                            array_push($imagesArr['data'], $imageItem);
+                        }
+                        echo json_encode($imagesArr, JSON_UNESCAPED_UNICODE);
                     } else {
                         $errors['noImageFoundError'] = 'No images found for this video!';
                         echo json_encode(array(
