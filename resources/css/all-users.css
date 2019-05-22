@@ -5,18 +5,22 @@ h1 {
 }
 
 ul {
-    margin: auto 25%;
-    width: 50%;
+    margin: auto 12.5%;
+    width: 75%;
     list-style-type: none;
     color: rgb(212, 212, 212);
     text-align: left;
     font-size: 20px;
 }
 
+ul[id^="ul-"] {
+    width: 50%;
+}
+
 li {
     margin: 10px;
-    padding: 10px;
-    height: 30px;
+    padding: 10px 10px 20px 10px;
+    height: auto;
     border-bottom: 2px solid rgb(212, 212, 212);
 }
 
