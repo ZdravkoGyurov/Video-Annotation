@@ -13,19 +13,20 @@
             $user->findUserByEmail($_COOKIE['loggedUserEmail']);
 
             if($user->roleName == 'User') {
-                Validator::validateVideoName(pathinfo($_FILES['uploaded-file']['name'], PATHINFO_FILENAME), $errors);
+                $fileNamePure = pathinfo($_FILES['uploaded-file']['name'], PATHINFO_FILENAME);
+                Validator::validateVideoName($fileNamePure, $errors);
 
                 if(empty($errors)) {
                     if(!empty($_FILES['uploaded-file']['name'])) {
                         $uploadedFile = '';
             
                         if(!empty($_FILES['uploaded-file']['type'])){
-                            $fileName = $_FILES['uploaded-file']['name'];
+                            $fileNameWithType = $_FILES['uploaded-file']['name'];
                             $sourcePath = $_FILES['uploaded-file']['tmp_name'];
-                            $targetPath = "..\\uploaded-videos\\".$fileName;
+                            $targetPath = "..\\uploaded-videos\\".$fileNameWithType;
             
-                            define("pathDB", substr(getcwd(), 0, -3).'uploaded-videos\\'.$fileName);
-                            define("nameDB", $fileName);
+                            define("pathDB", substr(getcwd(), 0, -3).'uploaded-videos\\'.$fileNameWithType);
+                            define("nameDB", $fileNamePure);
                             define("typeDB", $_FILES['uploaded-file']['type']);
                             define("userIdDB", $user->id);
 
