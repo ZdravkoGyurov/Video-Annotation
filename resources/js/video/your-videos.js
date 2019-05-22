@@ -44,6 +44,13 @@ function showYourVideos() {
                     }
                 });
                 item.appendChild(btn);
+
+                var editLink = document.createElement('a');
+                editLink.id = "link-edit-" + value.id;
+                editLink.innerHTML = "Edit";
+                editLink.href = "../video/edit-video.php?videoName=" + value.name;
+                editLink.className = "edit-link";
+                item.appendChild(editLink);
             }
             console.log(response);
         },
