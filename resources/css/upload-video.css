@@ -4,7 +4,11 @@ h1 {
     color: rgb(212, 212, 212);
 }
 
-i, button, p {
+#btn {
+    cursor: pointer;
+}
+
+div > i, button, p {
     color: rgb(212, 212, 212);
     font-size: 25px;
     font-family: Arial, Helvetica, sans-serif;
@@ -50,7 +54,7 @@ p {
     text-align: center;
 }
 
-i {
+div > i {
     margin: 5px 0 5px 5px;
 }
 
@@ -73,4 +77,14 @@ i {
 
 #btn-upload:active {
     transform: translateY(2px);
+}
+
+#success-message {
+    color: rgb(82, 200, 255);
+    font-size: 20px;
+}
+
+#fail-message {
+    color: rgb(255, 82, 111);
+    font-size: 20px;
 }
