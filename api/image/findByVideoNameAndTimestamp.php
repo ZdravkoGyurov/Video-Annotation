@@ -5,7 +5,7 @@
     function findByVideoNameAndTimestamp($video, $image) {
         $data = json_decode(file_get_contents('php://input'));
 
-        if(isset($data->videoName) && isset($data->timestamp)) {
+        if($data->videoName != '' && $data->timestamp != '') {
             if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
                 $errors = array();
 

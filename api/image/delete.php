@@ -9,7 +9,7 @@
     function deleteImage($user, $video, $image) {
         $data = json_decode(file_get_contents('php://input'));
 
-        if(isset($data->videoId) && isset($data->timestamp)) {
+        if($data->videoId != '' && $data->timestamp != '') {
             if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
                 $errors = array();
 
