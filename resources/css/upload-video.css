@@ -1,0 +1,76 @@
+h1 {
+    margin: 55px auto 5px auto;
+    text-align: center;
+    color: rgb(212, 212, 212);
+}
+
+i, button, p {
+    color: rgb(212, 212, 212);
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+    background-color: #4d4d4d;
+    border: none;
+    outline: none;
+}
+
+#whole-button {
+    border: 2px solid rgb(212, 212, 212);
+    border-radius: 5px;
+    width: 200px;
+    margin: 25px auto;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#whole-button:hover i {
+    color: #00ffaa;
+}
+
+#whole-button:hover button {
+    color: #00ffaa;
+}
+
+#whole-button:hover {
+    color: #00ffaa;
+    border: 2px solid #00ffaa;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 #00ffaa;
+}
+
+#whole-button:active {
+    transform: translateY(2px);
+}
+
+p {
+    margin: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+i {
+    margin: 5px 0 5px 5px;
+}
+
+#btn-upload {
+    display: block;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 2px solid rgb(212, 212, 212);
+    border-radius: 5px;
+    width: 200px;
+    margin: 25px auto;
+    cursor: pointer;
+    text-align: center;
+}
+
+#btn-upload:hover {
+    color: #00ffaa;
+    border: 2px solid #00ffaa;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 #00ffaa;
+}
+
+#btn-upload:active {
+    transform: translateY(2px);
+}
