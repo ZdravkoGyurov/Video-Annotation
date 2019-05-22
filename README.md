@@ -30,6 +30,5 @@ LOGGED IN AS ADMIN
 •	Delete video (Model ✔ | View ✖ | Controller ✔)  
 •	Log out (Model ✔ | View ✖ | Controller ✔)   
 
-•	upload video success/error messages   
 •	"edit" button in "your videos"   
 •	clickable video names to open "watch video"   
