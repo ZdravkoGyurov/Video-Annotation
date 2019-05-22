@@ -46,7 +46,7 @@
 
         public static function validateVideoName($videoName, &$errors) {
             if(!ctype_alnum($videoName)) {
-                $errors['videoNameError'] = 'Video can contain only letters and numbers';
+                $errors['videoNameError'] = 'Video name can contain only letters and numbers';
             }
         }
 
