@@ -71,6 +71,10 @@ p {
     color: rgb(212, 212, 212);
 }
 
+#success-message {
+    color: rgb(82, 200, 255);
+}
+
 .small-links {
     font-size: 20px;
     font-style: italic;
