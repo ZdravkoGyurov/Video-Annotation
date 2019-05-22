@@ -29,5 +29,3 @@ LOGGED IN AS ADMIN
 •	Show video (Model ✔ | View ✖ | Controller ✔)   
 •	Delete video (Model ✔ | View ✖ | Controller ✔)  
 •	Log out (Model ✔ | View ✖ | Controller ✔)   
-
-•	"edit" button in "your videos"
