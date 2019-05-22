@@ -53,10 +53,12 @@ input[type=submit] {
     color: #4d4d4d;
     font-size: 20px;
     cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 input[type=submit]:hover {
     background-color: #00ffaa;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 #00ffaa;
 }
 
 input[type=submit]:active {
