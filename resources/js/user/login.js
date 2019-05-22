@@ -37,8 +37,6 @@ document.addEventListener("DOMContentLoaded", function(){
     var url = new URL(urlString);
     var register = url.searchParams.get("register");
     var restore = url.searchParams.get("restore");
-    console.log(register);
-    console.log(restore);
 
     if(register) {
         var successMessage = document.createElement('p');
