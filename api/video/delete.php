@@ -12,12 +12,12 @@
 
             $user->findUserByEmail($_COOKIE['loggedUserEmail']);
 
-            if($user->roleName == 'Admin') {
-                Validator::validateVideoName($name, $errors);
+            Validator::validateVideoName($name, $errors);
 
+            $video->findVideoByName($name);
+
+            if($user->roleName == 'Admin' || $user->id == $video->userId) {
                 if(empty($errors)) {
-                    $video->findVideoByName($name);
-
                     if(!isset($video->name)) {
                         $errors['noSuchVideoFoundError'] = 'No video with given name found!';
                         echo json_encode(array(
