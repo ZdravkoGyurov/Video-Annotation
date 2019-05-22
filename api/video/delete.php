@@ -24,6 +24,9 @@
                             'errors' => $errors
                         ));
                     } else if($video->deleteVideo($video->name)) {
+                        if (is_file($video->path)) {
+                            unlink($video->path);
+                        }
                         echo json_encode($video, JSON_UNESCAPED_UNICODE);
                     } else {
                         $errors['unableToDeleteVideoError'] = 'Video could not be deleted!';
