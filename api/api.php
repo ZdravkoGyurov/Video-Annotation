@@ -26,6 +26,7 @@
     include_once 'video/findAllByUser.php';
     include_once 'video/findAll.php';
     include_once 'video/delete.php';
+    include_once 'video/create.php';
 
     $database = new Database();
     $connection = $database->getConnection();
@@ -76,6 +77,12 @@
             $video = new Video($connection);
             $image = new Image($connection);
             deleteImage($user, $video, $image);
+        }
+    } else if($uriSegments[1] == 'upload-video') {
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $user = new User($connection);
+            $video = new Video($connection);
+            uploadVideo($user, $video);
         }
     } else if(strpos($uriSegments[1], '/')) {
         $segments = explode('/', $uriSegments[1]);
