@@ -10,7 +10,20 @@
             $numberOfVideos = $allVideos->rowCount();
 
             if($numberOfVideos > 0) {
-                echo json_encode($allVideos->fetchAll(PDO::FETCH_ASSOC), JSON_UNESCAPED_UNICODE);
+                $videosArr = array();
+                $videosArr['data'] = array();
+
+                while($row = $allVideos->fetch(PDO::FETCH_ASSOC)) {
+                    $videoItem = array(
+                        'id' => $row['id'],
+                        'path' => $row['path'],
+                        'name' => $row['name'],
+                        'type' => $row['type'],
+                        'userId' => $row['user_id']
+                    );
+                    array_push($videosArr['data'], $videoItem);
+                }
+                echo json_encode($videosArr, JSON_UNESCAPED_UNICODE);
             } else {
                 $errors['noVideoFoundError'] = 'No videos found!';
                 echo json_encode(array(
