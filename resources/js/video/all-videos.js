@@ -49,11 +49,39 @@ function removeVideo(name) {
         type: "DELETE",
         url: url,
         success: function(response) {
-            console.log(response);
-            location.reload();
+            if(!response.errors) {
+                if(!window.location.href.includes("?deleted=" + name) && !window.location.href.includes("?deleted=")) {
+                    window.location.href += "?deleted=" + name;
+                } else if(!window.location.href.includes("?deleted=" + name)) {
+                    var urlWithoutParameters = window.location.href.substring(0, window.location.href.indexOf('?'));
+                    window.location.href = urlWithoutParameters + "?deleted=" + name;
+                } else {
+                    location.reload();
+                }
+            } else {
+                if(!document.getElementById("fail-message")) {
+                    var failMessage = document.createElement('p');
+                    failMessage.id = "fail-message";
+                    failMessage.innerHTML = "Failed to delete video!";
+                    document.getElementsByTagName("h1")[0].prepend(failMessage);
+                }
+            }
         },
         error: function(response) {
             console.log(response);
         }
     });
 };
+
+document.addEventListener("DOMContentLoaded", function(){
+    var urlString = window.location.href;
+    var url = new URL(urlString);
+    var deleted = url.searchParams.get("deleted");
+
+    if(deleted) {
+        var successMessage = document.createElement('p');
+        successMessage.id = "success-message";
+        successMessage.innerHTML = "Video " + "'" + deleted + "'" + " successfully deleted!";
+        document.getElementsByTagName("h1")[0].prepend(successMessage);
+    }
+});
