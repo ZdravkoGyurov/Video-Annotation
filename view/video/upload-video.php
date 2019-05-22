@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="../../resources/css/upload-video.css">
 <h1>Upload video</h1>
 <form enctype="multipart/form-data" id="uploadFileForm" >
-    <input id="hidden-input" name="uploaded-file" accept="video/*" type="file" hidden="hidden">
+    <input id="hidden-input" name="uploaded-file" accept="video/*" type="file" hidden="hidden"></input>
     <div id="whole-button">
         <i class="fas fa-upload"></i>
         <button id="btn" type="button">Choose a File</button>
