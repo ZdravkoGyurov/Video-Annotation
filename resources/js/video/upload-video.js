@@ -29,10 +29,40 @@ uploadFileForm.addEventListener("submit", function(e) {
         cache: false,
         processData: false,
         success: function(response) {
-            console.log(response);
+            if(!response.errors) {
+                if(!window.location.href.includes("?uploaded=true")) {
+                    window.location.href += "?uploaded=true";
+                } else {
+                    var urlWithoutParameters = window.location.href.substring(0, window.location.href.indexOf('?'));
+                    window.location.href = urlWithoutParameters + "?deleted=true";
+                }
+            } else {
+                if(document.getElementById("success-message")) {
+                    document.getElementById("success-message").remove();
+                }
+                if(!document.getElementById("fail-message")) {
+                    var failMessage = document.createElement('p');
+                    failMessage.id = "fail-message";
+                    failMessage.innerHTML = "Failed to upload video!";
+                    document.getElementsByTagName("h1")[0].prepend(failMessage);
+                }
+            }
         },
         error: function(response) {
             console.log(response);
         }
     });
+});
+
+document.addEventListener("DOMContentLoaded", function(){
+    var urlString = window.location.href;
+    var url = new URL(urlString);
+    var uploaded = url.searchParams.get("uploaded");
+
+    if(uploaded) {
+        var successMessage = document.createElement('p');
+        successMessage.id = "success-message";
+        successMessage.innerHTML = "Video successfully uploaded!";
+        document.getElementsByTagName("h1")[0].prepend(successMessage);
+    }
 });
