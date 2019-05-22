@@ -19,7 +19,6 @@ function showAllVideos() {
                 link.href = "../video/view-video.php?videoName=" + value.name;
                 link.className = "video-link";
                 item.appendChild(link);
-                // item.appendChild(document.createTextNode(value.name));
                 list.appendChild(item);
 
                 var decodedCookieRole = decodeURIComponent(getCookie('loggedUserRole'));
