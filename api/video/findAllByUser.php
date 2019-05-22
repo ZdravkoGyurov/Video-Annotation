@@ -8,7 +8,7 @@
 
             $user->findUserByEmail($_COOKIE['loggedUserEmail']);
 
-            if($user->roleName == 'User') {
+            if($user->roleName == 'Admin' || $user->email == $userEmail) {
                 Validator::validateEmail($_COOKIE['loggedUserEmail'], $errors);
                 
                 if(empty($errors)) {
@@ -57,7 +57,7 @@
                 ));
             }
         } else {
-            $errors['noAdminError'] = 'You need to be logged in as User to see your videos!';
+            $errors['noAdminError'] = 'You need to be logged in to see your videos!';
             echo json_encode(array(
                 'errors' => $errors
             ));
