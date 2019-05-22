@@ -40,3 +40,13 @@ button:hover {
 button:active {
     transform: translateY(2px);
 }
+
+#success-message {
+    color: rgb(82, 200, 255);
+    font-size: 20px;
+}
+
+#fail-message {
+    color: rgb(255, 82, 111);
+    font-size: 20px;
+}
