@@ -32,6 +32,7 @@
 
                             if($video->createVideo(pathDB, nameDB, typeDB, userIdDB)) {
                                 if(move_uploaded_file($sourcePath, $targetPath)) {
+                                    mkdir(substr(getcwd(), 0, -3).'uploaded-videos\\'.$fileNamePure);
                                     echo json_encode($video, JSON_UNESCAPED_UNICODE);
                                 } else {
                                     $video->deleteVideo(nameDB);

@@ -26,6 +26,7 @@
                     } else if($video->deleteVideo($video->name)) {
                         if (is_file($video->path)) {
                             unlink($video->path);
+                            Utils::deleteDir(substr(getcwd(), 0, -3).'uploaded-videos\\'.$video->name);
                         }
                         echo json_encode($video, JSON_UNESCAPED_UNICODE);
                     } else {
