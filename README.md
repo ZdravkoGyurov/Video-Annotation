@@ -29,3 +29,6 @@ LOGGED IN AS ADMIN
 •	Show video (Model ✔ | View ✖ | Controller ✔)   
 •	Delete video (Model ✔ | View ✖ | Controller ✔)  
 •	Log out (Model ✔ | View ✖ | Controller ✔)   
+
+TODO:   
+•	Change find video to return video + video images + video subtitles
