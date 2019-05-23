@@ -3,6 +3,8 @@
 
     include_once '../validate/Validator.php';
 
+    include_once '../utils/Utils.php';
+
     include_once '../models/User.php';
     include_once '../models/Video.php';
     include_once '../models/Image.php';
