@@ -68,6 +68,7 @@ function removeVideo(name) {
         type: "DELETE",
         url: url,
         success: function(response) {
+            console.log(response);
             if(!response.errors) {
                 if(!window.location.href.includes("?deleted=" + name) && !window.location.href.includes("?deleted=")) {
                     window.location.href += "?deleted=" + name;

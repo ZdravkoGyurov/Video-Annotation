@@ -34,7 +34,7 @@ uploadFileForm.addEventListener("submit", function(e) {
                     window.location.href += "?uploaded=true";
                 } else {
                     var urlWithoutParameters = window.location.href.substring(0, window.location.href.indexOf('?'));
-                    window.location.href = urlWithoutParameters + "?deleted=true";
+                    window.location.href = urlWithoutParameters + "?uploaded=true";
                 }
             } else {
                 if(document.getElementById("success-message")) {
