@@ -31,6 +31,6 @@ LOGGED IN AS ADMIN
 •	Log out (Model ✔ | View ✖ | Controller ✔)   
 
 TODO:   
-•	Change find video to return video + video images + video subtitles
-•	Change image timestamp in db to decimal number
-•	Delete image by videoId and timestamp
+•	Change find video to return video + video images + video subtitles    
+•	Change image timestamp in db to decimal number    
+•	Delete image by videoId and timestamp   
