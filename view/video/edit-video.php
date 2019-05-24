@@ -2,6 +2,12 @@
 <?php include '../common/header.html' ?>
 <link rel="stylesheet" href="../../resources/css/edit-video.css">
 <h1 id="page-header"></h1>
+<div id="image-modal">
+    <div id="image-modal-content">
+        <i id="image-modal-close-btn" class="fas fa-times close-modal"></i>
+        <canvas id="canvas"></canvas>
+    </div>
+</div>
 <div id="video-container">
     <div id="c-video">
         <video id="video" src=""></video>
