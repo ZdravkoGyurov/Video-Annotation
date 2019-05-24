@@ -20,6 +20,7 @@
     include_once 'subtitle/find.php';
     include_once 'subtitle/delete.php';
 
+    include_once 'image/create.php';
     include_once 'image/findByVideoNameAndTimestamp.php';
     include_once 'image/findAllByVideoName.php';
     include_once 'image/delete.php';
@@ -85,6 +86,13 @@
             $user = new User($connection);
             $video = new Video($connection);
             uploadVideo($user, $video);
+        }
+    } else if($uriSegments[1] == 'upload-image') {
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $user = new User($connection);
+            $video = new Video($connection);
+            $image = new Image($connection);
+            uploadImage($user, $video, $image);
         }
     } else if(strpos($uriSegments[1], '/')) {
         $segments = explode('/', $uriSegments[1]);
