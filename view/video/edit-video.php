@@ -6,6 +6,16 @@
     <div id="image-modal-content">
         <i id="image-modal-close-btn" class="fas fa-times close-modal"></i>
         <canvas id="canvas"></canvas>
+        <form id="submitImageForm" method="POST">
+            <label for="input-image-annotation">Caption</label>
+            <input id="input-image-annotation" name="annotation" type="text" placeholder="Write a caption here."></input>
+            <input id="input-image-timestamp" name="timestamp" type="hidden"></input>
+            <input id="input-image-videoid" name="videoid" type="hidden"></input>
+            <input id="input-image-videoname" name="videoname" type="hidden"></input>
+            <input id="input-image-videouserid" name="videouserid" type="hidden"></input>
+            <input id="input-image-imagedata" name="imagedata" type="hidden"></input>
+        </form>
+        <button id="save-image-button">Save Image</button>
     </div>
 </div>
 <div id="video-container">
