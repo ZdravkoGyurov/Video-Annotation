@@ -42,8 +42,6 @@ imageBtn.addEventListener("click", function() {
     iconPlayPause.className = "fas fa-play";
     video.pause();
     takeScreenShot();
-    // alert(videoId); to send
-    // alert(videoUserId); to send
 });
 
 var closeImageModalBtn = document.getElementById("image-modal-close-btn");
