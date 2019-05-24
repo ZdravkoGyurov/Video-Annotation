@@ -14,6 +14,40 @@ var currentTimeDisplay = document.getElementById('video-current-time-duration-ti
 var buttonExpandCompress = document.getElementById('video-button-expand-compress');
 var iconExpandCompress = document.getElementById('video-button-expand-compress-icon');
 
+var imageModal = document.getElementById("image-modal");
+
+var canvas = document.getElementById("canvas");
+var context = canvas.getContext("2d");
+var ratio, w, h;
+video.addEventListener("loadedmetadata", function() {
+    ratio = video.videoWidth / video.videoHeight;
+    w = video.videoWidth - 100;
+    h = parseInt(w / ratio, 10);
+    canvas.width = w;
+    canvas.height = h;
+}, false);
+
+function takeScreenShot() {
+    context.fillRect(0, 0, w, h);
+    context.drawImage(video, 0, 0, w, h);
+    imageModal.style.display = "block";
+}
+
+var imageBtn = document.getElementById("caption-image-btn");
+
+var videoId;
+imageBtn.addEventListener("click", function() {
+    iconPlayPause.className = "fas fa-play";
+    video.pause();
+    takeScreenShot();
+    // alert(videoId); to send
+});
+
+var closeImageModalBtn = document.getElementById("image-modal-close-btn");
+closeImageModalBtn.addEventListener("click", function() {
+    imageModal.style.display = "none";
+});
+
 document.addEventListener("DOMContentLoaded", function(){
     loadVideo();
 });
@@ -35,6 +69,7 @@ function loadVideo() {
                 if(response.errors) {
                     console.log(response.errors);
                 } else {
+                    videoId = response.id;
                     var pageHeader = document.getElementById("page-header");
                     pageHeader.innerHTML = response.name;
                     
