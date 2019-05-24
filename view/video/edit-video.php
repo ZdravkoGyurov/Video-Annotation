@@ -35,10 +35,10 @@
     </div>
 </div>
 <div id="caption-container">
-    <h2>Caption this moment via:</h2>
+    <h2>Caption this moment as:</h2>
     <div id="btn-container">
         <button id="caption-image-btn" class="caption-btn"><i class="fas fa-images caption-icon"></i>Image</button>
-        <button id="caption-subtitles-btn" class="caption-btn"><i class="fas fa-align-center caption-icon"></i>Subtitles</button>
+        <button id="caption-subtitles-btn" class="caption-btn"><i class="fas fa-align-center caption-icon"></i>Subtitle</button>
     </div>
 </div>
 <script type="text/javascript" src="../../resources/js/video/edit-video.js"></script>
