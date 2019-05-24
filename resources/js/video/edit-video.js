@@ -35,17 +35,53 @@ function takeScreenShot() {
 
 var imageBtn = document.getElementById("caption-image-btn");
 
-var videoId;
+var videoUserIdForForm;
+var videoNameForForm;
+var videoIdForForm;
 imageBtn.addEventListener("click", function() {
     iconPlayPause.className = "fas fa-play";
     video.pause();
     takeScreenShot();
     // alert(videoId); to send
+    // alert(videoUserId); to send
 });
 
 var closeImageModalBtn = document.getElementById("image-modal-close-btn");
 closeImageModalBtn.addEventListener("click", function() {
     imageModal.style.display = "none";
+});
+
+var saveImageBtn = document.getElementById("save-image-button");
+saveImageBtn.addEventListener("click", function() {
+    event.preventDefault();
+    var canvasDataUrl = canvas.toDataURL("image/png");
+    document.getElementById("input-image-imagedata").value = canvasDataUrl;
+
+    document.getElementById("input-image-videouserid").value = videoUserIdForForm;
+    document.getElementById("input-image-videoname").value = videoNameForForm;
+    document.getElementById("input-image-videoid").value = videoIdForForm;
+    document.getElementById("input-image-timestamp").value = video.currentTime;
+
+    var formData = new FormData(document.getElementById("submitImageForm"));
+    
+    $.ajax({
+        type: "POST",
+        url: "../../api/api.php/upload-image",
+        data: formData,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function(response) {
+            if(response.errors) {
+                console.log(response.errors);
+            } else {
+                console.log(response);
+            }
+        },
+        error: function(response) {
+            console.log(response);
+        }
+    });
 });
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -69,7 +105,10 @@ function loadVideo() {
                 if(response.errors) {
                     console.log(response.errors);
                 } else {
-                    videoId = response.id;
+                    videoIdForForm = response.id;
+                    videoUserIdForForm = response.userId;
+                    videoNameForForm = response.name;
+
                     var pageHeader = document.getElementById("page-header");
                     pageHeader.innerHTML = response.name;
                     
@@ -151,16 +190,21 @@ buttonPlayPause.addEventListener("click", togglePlayPause);
 video.addEventListener("click", togglePlayPause);
 
 document.body.onkeydown = function(e) {
-    if(e.keyCode == 32) {
-        togglePlayPause();
-    } else if(e.keyCode == 77) {
-        toggleMuteUnmute();
-    } else if(e.keyCode == 70) {
-        toggleExpandCompress();
-    } else if(e.keyCode == 37) {
-        video.currentTime -= 5;
-    } else if(e.keyCode == 39) {
-        video.currentTime += 5;
+    if(imageModal.style.display == "none") {
+        if(e.keyCode == 32) {
+            togglePlayPause();
+        } else if(e.keyCode == 77) {
+            toggleMuteUnmute();
+        } else if(e.keyCode == 70) {
+            toggleExpandCompress();
+        } else if(e.keyCode == 37) {
+            video.currentTime -= 5;
+        } else if(e.keyCode == 39) {
+            video.currentTime += 5;
+        }
+    }
+    if(e.keyCode == 27) {
+        imageModal.style.display = "none";
     }
 }
 
