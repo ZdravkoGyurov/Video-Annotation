@@ -73,7 +73,7 @@ saveImageBtn.addEventListener("click", function() {
             if(response.errors) {
                 console.log(response.errors);
             } else {
-                console.log(response);
+                location.reload();
             }
         },
         error: function(response) {
@@ -115,7 +115,68 @@ function loadVideo() {
                     var video = document.getElementById("video");
                     var parts = response.video.path.split("\\");
                     video.src = "..\\..\\uploaded-videos\\" + parts[parts.length - 1];
-                    console.log(response.video.path);
+                    
+                    var imagesContainer = document.getElementById("images-container");
+                    for(key in response.images.data) {
+                        var value = response.images.data[key];
+
+                        var imgContainer = document.createElement("div");
+                        imgContainer.className = "img-container set-time";
+                        imgContainer.setAttribute("timestamp", value.timestamp);
+
+                        var annotation = document.createElement("span");
+                        annotation.innerHTML = value.annotation;
+                        annotation.className = "img-annotation set-time";
+                        annotation.setAttribute("timestamp", value.timestamp);
+
+                        var timestamp = document.createElement("span");
+                        timestamp.innerHTML = value.timestamp.toString().toHHMMSS();
+                        timestamp.className = "img-timestamp set-time";
+                        timestamp.setAttribute("timestamp", value.timestamp);
+
+                        var img = document.createElement("img");
+
+                        var imgSrcParts = value.path.split("\\");
+                        img.src = "..\\..\\uploaded-videos\\" + imgSrcParts[imgSrcParts.length - 2] + "\\" + imgSrcParts[imgSrcParts.length - 1];
+                        img.className = "set-time";
+                        img.setAttribute("timestamp", value.timestamp);
+
+                        imgContainer.addEventListener("click", function(e) {
+                            if(e.target && e.target.classList.contains("set-time")) {
+                                video.currentTime = e.target.getAttribute("timestamp");
+                                window.scrollTo(0, 0);
+                            }
+                        });
+                        annotation.addEventListener("click", function(e) {
+                            if(e.target && e.target.classList.contains("set-time")) {
+                                video.currentTime = e.target.getAttribute("timestamp");
+                                window.scrollTo(0, 0);
+                            }
+                        });
+                        timestamp.addEventListener("click", function(e) {
+                            if(e.target && e.target.classList.contains("set-time")) {
+                                video.currentTime = e.target.getAttribute("timestamp");
+                                window.scrollTo(0, 0);
+                            }
+                        });
+                        img.addEventListener("click", function(e) {
+                            if(e.target && e.target.className == "set-time") {
+                                video.currentTime = e.target.getAttribute("timestamp");
+                                window.scrollTo(0, 0);
+                            }
+                        });
+                        imgContainer.addEventListener("click", function(e) {
+                            if(e.target && e.target.className == "fas fa-trash-alt") {
+                                deleteImage(e.target.getAttribute("timestamp"), e.target.getAttribute("videoid"));
+                            }
+                        });
+
+                        imgContainer.appendChild(annotation);
+                        imgContainer.innerHTML += '<i class="fas fa-trash-alt" timestamp="' + value.timestamp + '" videoid="' + response.video.id + '"></i>';
+                        imgContainer.appendChild(timestamp);
+                        imgContainer.appendChild(img);
+                        imagesContainer.appendChild(imgContainer);
+                    }
                 }
             },
             error: function(response) {
@@ -161,7 +222,7 @@ function toggleExpandCompress() {
         } else {
             iconExpandCompress.className = "fas fa-compress-arrows-alt";
             videoContainer.style.maxWidth = "none";
-            window.scrollTo(0,document.body.scrollHeight);
+            window.scrollTo(0, 0);
         }
     }
 }
@@ -192,6 +253,7 @@ video.addEventListener("click", togglePlayPause);
 document.body.onkeydown = function(e) {
     if(imageModal.style.display == "none") {
         if(e.keyCode == 32) {
+            e.preventDefault();
             togglePlayPause();
         } else if(e.keyCode == 77) {
             toggleMuteUnmute();
@@ -225,9 +287,33 @@ String.prototype.toHHMMSS = function () {
 }
 
 video.onloadeddata = function() {
+    imageModal.style.display = "none";
     currentTimeDisplay.innerHTML = video.currentTime.toString().toHHMMSS() + " / " + video.duration.toString().toHHMMSS();
 };
 
 video.addEventListener("timeupdate", function() {
     currentTimeDisplay.innerHTML = video.currentTime.toString().toHHMMSS() + " / " + video.duration.toString().toHHMMSS();
 });
+
+function deleteImage(timestamp, videoId) {
+    event.preventDefault();
+
+    var formData = JSON.stringify({videoId:videoId, timestamp:timestamp});
+
+    $.ajax({
+        type: "DELETE",
+        url: "../../api/api.php/delete-image",
+        dataType: "json",
+        data: formData,
+        success: function(response) {
+            if(response.errors) {
+                console.log(response.errors);
+            } else {
+                location.reload();
+            }
+        },
+        error: function(response) {
+            console.log(response);
+        }
+    });
+}
