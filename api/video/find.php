@@ -30,6 +30,7 @@
                         );
                         array_push($imagesArr['data'], $imageItem);
                     }
+                    usort($imagesArr['data'], "compareImageArrays");
                 }
                 if(!isset($video->name)) {
                     $errors['noSuchVideoFoundError'] = 'No video with given id found!';
@@ -54,4 +55,8 @@
                 'errors' => $errors
             ));
         }
+    }
+
+    function compareImageArrays($first, $second) {
+        return $first['timestamp'] - $second['timestamp'];
     }
