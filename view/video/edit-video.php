@@ -55,6 +55,14 @@
         <button id="caption-subtitles-btn" class="caption-btn"><i class="fas fa-align-center caption-icon"></i>Subtitle</button>
     </div>
 </div>
+<div id="delete-subtitle-container">
+    <h2>Delete subtitle:</h2>
+    <form id="delete-subtitle-form">
+            <label id="delete-subtitle-text-label" for="delete-subtitle-text-input">Caption:</label>
+            <input id="delete-subtitle-text-input" type="text" placeholder="Write text here."></input>
+            <button id="delete-subtitle-button">Delete Caption Subtitle</button>
+    </form>
+</div>
 <div id="images-container">
 </div>
 <script type="text/javascript" src="../../resources/js/video/edit-video.js"></script>
