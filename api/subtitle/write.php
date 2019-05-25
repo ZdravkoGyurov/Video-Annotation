@@ -23,7 +23,7 @@
 
                         $filePath = $subtitle->path;
                         $currentContent = file_get_contents($filePath);
-                        $currentContent .= "\n".$data->startTime."-->".$data->endTime."\n".$data->annotation."\n";
+                        $currentContent .= "\n".$data->startTime." --> ".$data->endTime."\n".$data->annotation."\n";
                         file_put_contents($filePath, $currentContent);
 
                         echo json_encode($subtitle, JSON_UNESCAPED_UNICODE);
