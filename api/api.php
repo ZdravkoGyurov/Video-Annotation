@@ -17,6 +17,7 @@
     include_once 'user/delete.php';
     include_once 'user/findAll.php';
     
+    include_once 'subtitle/write.php';
     include_once 'subtitle/find.php';
     include_once 'subtitle/delete.php';
 
@@ -85,7 +86,15 @@
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user = new User($connection);
             $video = new Video($connection);
-            uploadVideo($user, $video);
+            $subtitle = new Subtitle($connection);
+            uploadVideo($user, $video, $subtitle);
+        }
+    } else if($uriSegments[1] == 'write-subtitle') {
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $user = new User($connection);
+            $video = new Video($connection);
+            $subtitle = new Subtitle($connection);
+            writeSubtitle($user, $video, $subtitle);
         }
     } else if($uriSegments[1] == 'upload-image') {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
