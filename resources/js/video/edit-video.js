@@ -15,16 +15,40 @@ var buttonExpandCompress = document.getElementById('video-button-expand-compress
 var iconExpandCompress = document.getElementById('video-button-expand-compress-icon');
 
 var imageModal = document.getElementById("image-modal");
+var subtitleModal = document.getElementById("subtitle-modal");
 
 var canvas = document.getElementById("canvas");
+var subCanvas = document.getElementById("sub-canvas");
 var context = canvas.getContext("2d");
+var subContext = subCanvas.getContext("2d");
 var ratio, w, h;
+var subtitleSrc;
 video.addEventListener("loadedmetadata", function() {
+    track = document.createElement("track");
+    track.kind = "subtitles";
+    track.label = "English";
+    track.srclang = "en";
+    track.src = subtitleSrc;
+    track.default = true;
+    track.addEventListener("load", function() {
+       this.mode = "showing";
+       video.textTracks[0].mode = "showing";
+    });
+    this.appendChild(track);
+    
+    // var track = document.createElement("track");
+    // track.kind = "subtitles";
+    // track.label = "English";
+    // track.srclang = "en";
+    // track.src = subtitleSrc;
+
     ratio = video.videoWidth / video.videoHeight;
     w = video.videoWidth - 100;
     h = parseInt(w / ratio, 10);
     canvas.width = w;
     canvas.height = h;
+    subCanvas.width = w;
+    subCanvas.height = h;
 }, false);
 
 function takeScreenShot() {
@@ -33,7 +57,15 @@ function takeScreenShot() {
     imageModal.style.display = "block";
 }
 
+function takeScreenShotForSubtitle() {
+    subContext.fillRect(0, 0, w, h);
+    subContext.drawImage(video, 0, 0, w, h);
+    document.getElementById("label-subtitle-current-time").innerHTML = video.currentTime.toString().toHHMMSS();
+    subtitleModal.style.display = "block";
+}
+
 var imageBtn = document.getElementById("caption-image-btn");
+var subtitlesBtn = document.getElementById("caption-subtitles-btn");
 
 var videoUserIdForForm;
 var videoNameForForm;
@@ -44,9 +76,20 @@ imageBtn.addEventListener("click", function() {
     takeScreenShot();
 });
 
+subtitlesBtn.addEventListener("click", function() {
+    iconPlayPause.className = "fas fa-play";
+    video.pause();
+    takeScreenShotForSubtitle();
+});
+
 var closeImageModalBtn = document.getElementById("image-modal-close-btn");
 closeImageModalBtn.addEventListener("click", function() {
     imageModal.style.display = "none";
+});
+
+var closeSubtitleModalBtn = document.getElementById("subtitle-modal-close-btn");
+closeSubtitleModalBtn.addEventListener("click", function() {
+    subtitleModal.style.display = "none";
 });
 
 var saveImageBtn = document.getElementById("save-image-button");
@@ -84,6 +127,37 @@ saveImageBtn.addEventListener("click", function() {
     document.getElementById("input-image-annotation").value = "";
 });
 
+var saveSubtitleBtn = document.getElementById("save-subtitle-button");
+saveSubtitleBtn.addEventListener("click", function() {
+    event.preventDefault();
+
+    var duration = document.getElementById("input-subtitle-duration").value;
+    var startTime = video.currentTime.toFixed(3).toString();
+    var endTime = (video.currentTime + parseInt(duration)).toFixed(3).toString();
+    var startTimeFormatted = startTime.toHHMMSS() + startTime.substr(startTime.length - 4);
+    var endTimeFormatted = endTime.toHHMMSS() + endTime.substr(endTime.length - 4);
+    var annotation = document.getElementById("input-subtitle-annotation").value;
+    var formData = JSON.stringify({startTime:startTimeFormatted, endTime:endTimeFormatted, annotation:annotation, videoId:videoIdForForm, videoUserId:videoUserIdForForm});
+    console.log(formData);
+
+    $.ajax({
+        type: "POST",
+        url: "../../api/api.php/write-subtitle",
+        dataType: "json",
+        data: formData,
+        success: function(response) {
+            if(response.errors) {
+                console.log(response.errors);
+            } else {
+                location.reload();
+            }
+        },
+        error: function(response) {
+            console.log(response);
+        }
+    });
+});
+
 document.addEventListener("DOMContentLoaded", function(){
     loadVideo();
 });
@@ -105,6 +179,9 @@ function loadVideo() {
                 if(response.errors) {
                     console.log(response.errors);
                 } else {
+                    var subtitlesParts = response.subtitle.path.split("\\");
+                    subtitleSrc = "..\\..\\uploaded-videos\\" + response.video.name + "\\" + subtitlesParts[subtitlesParts.length - 1];
+
                     videoIdForForm = response.video.id;
                     videoUserIdForForm = response.video.userId;
                     videoNameForForm = response.video.name;
@@ -251,7 +328,7 @@ buttonPlayPause.addEventListener("click", togglePlayPause);
 video.addEventListener("click", togglePlayPause);
 
 document.body.onkeydown = function(e) {
-    if(imageModal.style.display == "none") {
+    if(imageModal.style.display == "none" && subtitleModal.style.display == "none") {
         if(e.keyCode == 32) {
             e.preventDefault();
             togglePlayPause();
