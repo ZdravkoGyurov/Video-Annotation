@@ -6,24 +6,45 @@
     'Access-Control-Allow-Headers, Content-Type, '.
     'Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
-    function writeSubtitle($user, $video, $subtitle) {
+    function eraseSubtitle($user, $video, $subtitle) {
         $data = json_decode(file_get_contents('php://input'));
 
-        if($data->startTime != '' && $data->endTime != '' && $data->annotation != '' && $data->videoId != '' && $data->videoUserId != '') {
+        if($data->subtitleText != '' && $data->videoId != '' && $data->videoUserId != '') {
             if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
                 $errors = array();
 
                 // validate fields
                 $user->findUserByEmail($_COOKIE['loggedUserEmail']);
-    
+
                 if($user->roleName == 'User' && $user->id == $data->videoUserId) {
                     if(empty($errors)) {
                         $subtitle->findSubtitleByVideoId($data->videoId);
 
                         $filePath = $subtitle->path;
-                        $currentContent = file_get_contents($filePath);
-                        $currentContent .= "\n".$data->startTime." --> ".$data->endTime."\n".$data->annotation."\n";
-                        file_put_contents($filePath, $currentContent);
+                        $file = file_get_contents($filePath);
+                        $lines = explode("\n", $file);
+                        $exclude = array();
+                        $skipNextLine = 0;
+
+                        for($i = 0; $i < count($lines) - 1; $i++) {
+                            if($skipNextLine != 0) {
+                                $skipNextLine--;
+                                continue;
+                            }
+                            if(strpos($lines[$i + 1], $data->subtitleText) !== false) {
+                                $skipNextLine = 2;
+                                continue;
+                            }
+                            $exclude[] = $lines[$i];
+                        }
+
+                        $newFileContent = implode("\n", $exclude)."\n";
+
+                        while(strpos($newFileContent, "\n\n\n")) {
+                            $newFileContent = str_replace("\n\n\n", "\n\n", $newFileContent);
+                        }
+
+                        file_put_contents($filePath, $newFileContent);
 
                         echo json_encode($subtitle, JSON_UNESCAPED_UNICODE);
                     } else {                
