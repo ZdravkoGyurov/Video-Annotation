@@ -371,3 +371,59 @@ video::cue {
     font-weight: bold;
     background-color: rgba(0, 0, 0, 0.01);
 }
+
+#delete-subtitle-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#delete-subtitle-text-label {
+    font-size: 20px;
+    color: rgb(200, 200, 200);
+    display: flex;
+}
+
+#delete-subtitle-text-input {
+    color: rgb(200, 200, 200);
+    outline: none;
+    margin: 0 10px;
+    font-size: 20px;
+    border: none;
+    border-bottom: 3px solid rgb(200, 200, 200);
+    background-color: #4d4d4d;
+    padding: 5px 5px 0 5px;
+}
+
+#delete-subtitle-text-input:focus {
+    border-bottom: 3px solid #00ffaa;
+}
+
+#delete-subtitle-text-input:-webkit-autofill {
+    -webkit-text-fill-color: rgb(200, 200, 200) !important;
+    -webkit-box-shadow: 0 0 0px 1000px #4d4d4d inset;
+}
+
+#delete-subtitle-button {
+    margin: 0 10px;
+    padding: 5px;
+    font-weight: bold;
+    background-color: #4d4d4d;
+    color: rgb(212, 212, 212);
+    font-size: 20px;
+    outline: none;
+    border: 2px solid rgb(212, 212, 212);
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#delete-subtitle-button:hover {
+    color: #00ffaa;
+    border: 2px solid #00ffaa;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 #00ffaa;
+}
+
+#delete-subtitle-button:active {
+    transform: translateY(2px);
+}
