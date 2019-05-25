@@ -158,7 +158,7 @@ h2 {
     margin: 5px;
 }
 
-#image-modal {
+#image-modal, #subtitle-modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -171,7 +171,7 @@ h2 {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-#image-modal-content {
+#image-modal-content, #subtitle-modal-content {
     margin: auto;
     width: 80%;
     background-color: rgb(200, 200, 200);
@@ -197,9 +197,7 @@ canvas {
     color: #00ffaa;
 }
 
-#submitImageForm {
-    /* width: 75%;
-    margin-left: 25%; */
+#submitImageForm, #submitSubtitleForm {
     display: flex;
     justify-content: center;
     transform: translateY(-30px);
