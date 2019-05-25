@@ -36,12 +36,37 @@ function loadVideo() {
                     console.log(response.errors);
                 } else {
                     var pageHeader = document.getElementById("page-header");
-                    pageHeader.innerHTML = response.name;
+                    pageHeader.innerHTML = response.video.name;
                     
                     var video = document.getElementById("video");
-                    var parts = response.path.split("\\");
+                    var parts = response.video.path.split("\\");
                     video.src = "..\\..\\uploaded-videos\\" + parts[parts.length - 1];
-                    console.log(response.path);
+                    console.log(response.video.path);
+
+                    var imagesContainer = document.getElementById("images-container");
+                    for(key in response.images.data) {
+                        var value = response.images.data[key];
+
+                        var imgContainer = document.createElement("div");
+                        imgContainer.id = "img-container";
+
+                        var annotation = document.createElement("p");
+                        annotation.innerHTML = value.annotation;
+                        annotation.className = "img-annotation";
+
+                        var timestamp = document.createElement("p");
+                        timestamp.innerHTML = value.timestamp.toString().toHHMMSS();
+                        timestamp.className = "img-timestamp";
+
+                        var img = document.createElement("img");
+
+                        var imgSrcParts = value.path.split("\\");
+                        img.src = "..\\..\\uploaded-videos\\" + imgSrcParts[imgSrcParts.length - 2] + "\\" + imgSrcParts[imgSrcParts.length - 1] + ".png";
+                        imgContainer.appendChild(annotation);
+                        imgContainer.appendChild(timestamp);
+                        imgContainer.appendChild(img);
+                        imagesContainer.appendChild(imgContainer);
+                    }
                 }
             },
             error: function(response) {

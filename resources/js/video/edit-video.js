@@ -58,7 +58,7 @@ saveImageBtn.addEventListener("click", function() {
     document.getElementById("input-image-videouserid").value = videoUserIdForForm;
     document.getElementById("input-image-videoname").value = videoNameForForm;
     document.getElementById("input-image-videoid").value = videoIdForForm;
-    document.getElementById("input-image-timestamp").value = video.currentTime;
+    document.getElementById("input-image-timestamp").value = parseFloat(video.currentTime.toFixed(2));
 
     var formData = new FormData(document.getElementById("submitImageForm"));
     
@@ -80,6 +80,8 @@ saveImageBtn.addEventListener("click", function() {
             console.log(response);
         }
     });
+
+    document.getElementById("input-image-annotation").value = "";
 });
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -103,17 +105,17 @@ function loadVideo() {
                 if(response.errors) {
                     console.log(response.errors);
                 } else {
-                    videoIdForForm = response.id;
-                    videoUserIdForForm = response.userId;
-                    videoNameForForm = response.name;
+                    videoIdForForm = response.video.id;
+                    videoUserIdForForm = response.video.userId;
+                    videoNameForForm = response.video.name;
 
                     var pageHeader = document.getElementById("page-header");
-                    pageHeader.innerHTML = response.name;
+                    pageHeader.innerHTML = response.video.name;
                     
                     var video = document.getElementById("video");
-                    var parts = response.path.split("\\");
+                    var parts = response.video.path.split("\\");
                     video.src = "..\\..\\uploaded-videos\\" + parts[parts.length - 1];
-                    console.log(response.path);
+                    console.log(response.video.path);
                 }
             },
             error: function(response) {
