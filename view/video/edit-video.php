@@ -18,6 +18,20 @@
         </form>
     </div>
 </div>
+<div id="subtitle-modal">
+    <div id="subtitle-modal-content">
+        <i id="subtitle-modal-close-btn" class="fas fa-times close-modal"></i>
+        <canvas id="sub-canvas"></canvas>
+        <form id="submitSubtitleForm">
+            <span id="label-subtitle-current-time"></span>
+            <label id="label-subtitle-duration" for="input-subtitle-duration">Duration:</label>
+            <input id="input-subtitle-duration" type="number" step="0.01" placeholder="Write duration here."></input>
+            <label id="label-subtitle-annotation" for="input-subtitle-annotation">Caption:</label>
+            <input id="input-subtitle-annotation" type="text" placeholder="Write a caption here."></input>
+            <button id="save-subtitle-button">Save Caption Subtitle</button>
+        </form>
+    </div>
+</div>
 <div id="video-container">
     <div id="c-video">
         <video id="video" src=""></video>
