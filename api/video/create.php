@@ -6,7 +6,7 @@
     'Access-Control-Allow-Headers, Content-Type, '.
     'Access-Control-Allow-Methods, Authorization, X-Requested-With');
    
-    function uploadVideo($user, $video) {
+    function uploadVideo($user, $video, $subtitle) {
         if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
             $errors = array();
 
@@ -33,6 +33,14 @@
                             if($video->createVideo(pathDB, nameDB, typeDB, userIdDB)) {
                                 if(move_uploaded_file($sourcePath, $targetPath)) {
                                     mkdir(substr(getcwd(), 0, -3).'uploaded-videos\\'.$fileNamePure);
+                                    $video->findVideoByName(nameDB);
+                                    $subFilePath = substr(getcwd(), 0, -3).'uploaded-videos\\'.$fileNamePure.'\\'.$fileNamePure.'.vtt';
+                                    $subtitle->createSubtitle($subFilePath, $fileNamePure, 'subtitles/vtt', $video->id);
+                                    touch($subFilePath);
+                                    $subFile = file_get_contents($subFilePath);
+                                    $subFile .= "WEBVTT\n\n";
+                                    file_put_contents($subFilePath, $subFile);
+
                                     echo json_encode($video, JSON_UNESCAPED_UNICODE);
                                 } else {
                                     $video->deleteVideo(nameDB);
