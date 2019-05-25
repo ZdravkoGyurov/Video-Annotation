@@ -35,12 +35,6 @@ video.addEventListener("loadedmetadata", function() {
        video.textTracks[0].mode = "showing";
     });
     this.appendChild(track);
-    
-    // var track = document.createElement("track");
-    // track.kind = "subtitles";
-    // track.label = "English";
-    // track.srclang = "en";
-    // track.src = subtitleSrc;
 
     ratio = video.videoWidth / video.videoHeight;
     w = video.videoWidth - 100;
@@ -60,7 +54,7 @@ function takeScreenShot() {
 function takeScreenShotForSubtitle() {
     subContext.fillRect(0, 0, w, h);
     subContext.drawImage(video, 0, 0, w, h);
-    document.getElementById("label-subtitle-current-time").innerHTML = video.currentTime.toString().toHHMMSS();
+    document.getElementById("label-subtitle-current-time").innerHTML = "Current time: " + video.currentTime.toString().toHHMMSS();
     subtitleModal.style.display = "block";
 }
 
@@ -344,6 +338,7 @@ document.body.onkeydown = function(e) {
     }
     if(e.keyCode == 27) {
         imageModal.style.display = "none";
+        subtitleModal.style.display = "none";
     }
 }
 

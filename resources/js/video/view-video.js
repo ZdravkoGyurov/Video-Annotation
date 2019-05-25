@@ -14,6 +14,21 @@ var currentTimeDisplay = document.getElementById('video-current-time-duration-ti
 var buttonExpandCompress = document.getElementById('video-button-expand-compress');
 var iconExpandCompress = document.getElementById('video-button-expand-compress-icon');
 
+var subtitleSrc;
+video.addEventListener("loadedmetadata", function() {
+    track = document.createElement("track");
+    track.kind = "subtitles";
+    track.label = "English";
+    track.srclang = "en";
+    track.src = subtitleSrc;
+    track.default = true;
+    track.addEventListener("load", function() {
+       this.mode = "showing";
+       video.textTracks[0].mode = "showing";
+    });
+    this.appendChild(track);
+});
+
 document.addEventListener("DOMContentLoaded", function(){
     loadVideo();
 });
@@ -35,6 +50,9 @@ function loadVideo() {
                 if(response.errors) {
                     console.log(response.errors);
                 } else {
+                    var subtitlesParts = response.subtitle.path.split("\\");
+                    subtitleSrc = "..\\..\\uploaded-videos\\" + response.video.name + "\\" + subtitlesParts[subtitlesParts.length - 1];
+
                     var pageHeader = document.getElementById("page-header");
                     pageHeader.innerHTML = response.video.name;
                     
