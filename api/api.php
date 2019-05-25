@@ -117,7 +117,9 @@
         } else if($segments[0] == 'find-video') {
             if($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $video = new Video($connection);
-                findVideo($video, $segments[1]);
+                $image = new Image($connection);
+                $subtitle = new Subtitle($connection);
+                findVideo($video, $image, $subtitle, $segments[1]);
             }
         } else if($segments[0] == 'find-user-videos') {
             if($_SERVER['REQUEST_METHOD'] == 'GET') {
