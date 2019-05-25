@@ -18,5 +18,7 @@
         </div>
     </div>
 </div>
+<div id="images-container">
+</div>
 <script type="text/javascript" src="../../resources/js/video/view-video.js"></script>
 <?php include '../common/footer.html' ?>
