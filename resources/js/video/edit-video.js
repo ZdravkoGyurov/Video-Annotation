@@ -154,6 +154,8 @@ saveSubtitleBtn.addEventListener("click", function() {
 
 document.addEventListener("DOMContentLoaded", function(){
     loadVideo();
+    imageModal.style.display = "none";
+    subtitleModal.style.display = "none";
 });
 
 function loadVideo() {
@@ -382,6 +384,37 @@ function deleteImage(timestamp, videoId) {
                 console.log(response.errors);
             } else {
                 location.reload();
+            }
+        },
+        error: function(response) {
+            console.log(response);
+        }
+    });
+}
+
+var deleteSubtitleBtn = document.getElementById("delete-subtitle-button");
+deleteSubtitleBtn.addEventListener("click", function() {
+    deleteSubtitle();
+});
+
+function deleteSubtitle() {
+    event.preventDefault();
+
+    var subtitleText = document.getElementById("delete-subtitle-text-input").value;
+    
+    var formData = JSON.stringify({subtitleText:subtitleText, videoId:videoIdForForm, videoUserId:videoUserIdForForm});
+
+    $.ajax({
+        type: "POST",
+        url: "../../api/api.php/erase-subtitle",
+        dataType: "json",
+        data: formData,
+        success: function(response) {
+            if(response.errors) {
+                console.log(response.errors);
+            } else {
+                // location.reload();
+                console.log(response);
             }
         },
         error: function(response) {
