@@ -41,6 +41,9 @@
                                         'errors' => $errors
                                     ));
                                 } else if($image->deleteImage($data->videoId, $data->timestamp)) {
+                                    if(is_file($image->path)) {
+                                        unlink($image->path);
+                                    }
                                     echo json_encode($image, JSON_UNESCAPED_UNICODE);
                                 } else {
                                     $errors['unableToDeleteImageError'] = 'Image could not be deleted!';

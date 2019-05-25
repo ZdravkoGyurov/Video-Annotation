@@ -25,7 +25,7 @@
                 if(empty($errors)) {
                     $imageName = $videoName.'_'.$timestamp;
                     $targetPath = '..\\uploaded-videos\\'.$videoName.'\\'.$imageName.'.png';
-                    define("pathDB", substr(getcwd(), 0, -3).'uploaded-videos\\'.$videoName.'\\'.$imageName);
+                    define("pathDB", substr(getcwd(), 0, -3).'uploaded-videos\\'.$videoName.'\\'.$imageName.'.png');
                     define("nameDB", $imageName);
                     define("typeDB", 'image/png');
                     define("timestampDB", $timestamp);
