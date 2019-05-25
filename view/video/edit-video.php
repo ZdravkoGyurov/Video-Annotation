@@ -41,5 +41,7 @@
         <button id="caption-subtitles-btn" class="caption-btn"><i class="fas fa-align-center caption-icon"></i>Subtitle</button>
     </div>
 </div>
+<div id="images-container">
+</div>
 <script type="text/javascript" src="../../resources/js/video/edit-video.js"></script>
 <?php include '../common/footer.html' ?>
