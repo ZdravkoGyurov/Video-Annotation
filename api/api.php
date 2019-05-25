@@ -19,6 +19,7 @@
     
     include_once 'subtitle/write.php';
     include_once 'subtitle/find.php';
+    include_once 'subtitle/erase.php';
     include_once 'subtitle/delete.php';
 
     include_once 'image/create.php';
@@ -102,6 +103,13 @@
             $video = new Video($connection);
             $image = new Image($connection);
             uploadImage($user, $video, $image);
+        }
+    } else if($uriSegments[1] == 'erase-subtitle') {
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $user = new User($connection);
+            $video = new Video($connection);
+            $subtitle = new Subtitle($connection);
+            eraseSubtitle($user, $video, $subtitle);
         }
     } else if(strpos($uriSegments[1], '/')) {
         $segments = explode('/', $uriSegments[1]);
