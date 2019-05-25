@@ -254,3 +254,57 @@ canvas {
 #save-image-button:active {
     transform: translateY(2px);
 }
+
+#images-container {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+    justify-content: space-between;
+    width: 70%;
+    margin: 50px 15% 50px 15%;
+}
+
+.img-container {
+    display: inline-block;
+    margin-top: 15px;
+    padding-top: 5px;
+    border: 3px solid rgb(212, 212, 212);
+    border-radius: 5px;
+    max-width: 400px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.img-container:hover {
+    border: 3px solid #00ffaa;
+    color: #00ffaa;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 #00ffaa;
+}
+
+img {
+    width: 100%;
+}
+
+.img-annotation {
+    color: rgb(212, 212, 212);
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.img-timestamp {
+    color: rgb(212, 212, 212);
+    font-size: 20px;
+    float: right;
+    margin-right: 5px;
+}
+
+.fa-trash-alt {
+    color: rgb(212, 212, 212);
+    float: right;
+    font-size: 20px;
+    margin: 0 5px;
+}
+
+.fa-trash-alt:hover {
+    color: #00ffaa;
+}
