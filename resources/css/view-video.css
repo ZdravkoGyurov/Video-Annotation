@@ -158,3 +158,9 @@ img {
     float: right;
     margin-right: 5px;
 }
+
+video::cue {
+    color: yellow;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.01);
+}

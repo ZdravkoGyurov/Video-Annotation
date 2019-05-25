@@ -306,3 +306,68 @@ img {
 .fa-trash-alt:hover {
     color: #00ffaa;
 }
+
+#label-subtitle-current-time {
+    margin: 0 15px;
+}
+
+#label-subtitle-current-time,
+#label-subtitle-duration,
+#label-subtitle-annotation {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+}
+
+#input-subtitle-duration,
+#input-subtitle-annotation {
+    color: rgba(0, 0, 0, 0.8);
+    outline: none;
+    margin: 0 10px;
+    font-size: 20px;
+    border: none;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.5);
+    background-color: rgb(200, 200, 200);
+    padding: 5px 5px 0 5px;
+}
+
+#input-subtitle-duration:focus,
+#input-subtitle-annotation:focus {
+    border-bottom: 3px solid #00ffaa;
+}
+
+#input-subtitle-duration:-webkit-autofill,
+#input-subtitle-annotation:-webkit-autofill {
+    -webkit-text-fill-color: rgba(0, 0, 0, 0.8) !important;
+    -webkit-box-shadow: 0 0 0px 1000px rgb(200, 200, 200) inset;
+}
+
+#save-subtitle-button {
+    margin: 0 10px;
+    padding: 5px;
+    font-weight: bold;
+    background-color: #4d4d4d;
+    color: rgb(212, 212, 212);
+    font-size: 20px;
+    outline: none;
+    border: 2px solid #4d4d4d;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#save-subtitle-button:hover {
+    color: #00ffaa;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 #00ffaa;
+}
+
+#save-subtitle-button:active {
+    transform: translateY(2px);
+}
+
+video::cue {
+    color: yellow;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.01);
+}
