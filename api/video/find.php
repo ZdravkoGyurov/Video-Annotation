@@ -1,6 +1,6 @@
 <?php
     header('Access-Control-Allow-Origin: *');
-    header('Content-Type: application/json');
+    header('Content-Type: application/javascript');
     
     function findVideo($video, $image, $subtitle, $name) {
         if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
