@@ -39,7 +39,7 @@ CREATE TABLE video_annotation.image(
 	path VARCHAR(510) NOT NULL,
 	name VARCHAR(255) NOT NULL UNIQUE,
 	type VARCHAR(255) NOT NULL,
-	timestamp INT NOT NULL,
+	timestamp DECIMAL(11, 2) NOT NULL,
 	annotation VARCHAR(255) NOT NULL,
 	video_id INT NOT NULL,
 	PRIMARY KEY(id),
@@ -58,7 +58,7 @@ CREATE TABLE video_annotation.subtitle(
 
 INSERT INTO video_annotation.role(name) VALUES('Admin');
 INSERT INTO video_annotation.role(name) VALUES('User');
-INSERT INTO video_annotation.user(email, name, surname, password, role_id) VALUES('zdravko.gyurov97@gmail.com', N'Здравко', N'Гюров', '$2y$10$LLyr9O/5n9.MJtGYMCltUerYIO8pbfzWYBJxT9EbCnIqF84PIJqLa', '1');
-INSERT INTO video_annotation.video(path, name, type, user_id) VALUES('video_path', 'video_name', 'video_type', '1');
-INSERT INTO video_annotation.image(path, name, type, timestamp, annotation, video_id) VALUES('image_path', 'image_name', 'image_type', '60', 'image_annotation', '1');
-INSERT INTO video_annotation.subtitle(path, name, type, video_id) VALUES('subtitle_path', 'subtitle_name', 'subtitle_type', '1');
+INSERT INTO video_annotation.user(email, name, surname, password, role_id) VALUES('zdravko.gyurov97@gmail.com', N'Здравко', N'Гюров', '$2y$10$LLyr9O/5n9.MJtGYMCltUerYIO8pbfzWYBJxT9EbCnIqF84PIJqLa', '1'); --Ins3curePa$$w0rd
+-- INSERT INTO video_annotation.video(path, name, type, user_id) VALUES('video_path', 'video_name', 'video_type', '1');
+-- INSERT INTO video_annotation.image(path, name, type, timestamp, annotation, video_id) VALUES('image_path', 'image_name', 'image_type', '60', 'image_annotation', '1');
+-- INSERT INTO video_annotation.subtitle(path, name, type, video_id) VALUES('subtitle_path', 'subtitle_name', 'subtitle_type', '1');
