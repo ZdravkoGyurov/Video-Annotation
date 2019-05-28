@@ -32,6 +32,7 @@ LOGGED IN AS ADMIN
 
 TODO:   
 •	Fix file (validation) validate/Validator.php    
+•	Fix file (create uploaded-video dir) api/video/create.php      
 •	Fix file (validation) api/image/erase.php   
 •	Fix file (validation) api/image/write.php   
 •	Fix file (comments) resources/css/style.css   
@@ -41,4 +42,5 @@ TODO:
 •	Fix file (validation, logging handle errors, keyCodes) resources/js/video/edit-video.js   
 •	Fix file (validation, logging handle errors) resources/js/video/upload-video.js   
 •	Fix file (validation, logging handle errors) resources/js/video/video-video.js    
-•	Fix file (logging handle errors) resources/js/video/your-videos.js    
+•	Fix file (logging handle errors) resources/js/video/your-videos.js        
+•	Fix file (upload_max_filesize / post_max_size) php.ini    
