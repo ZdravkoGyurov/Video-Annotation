@@ -46,10 +46,9 @@ function showAllUsers() {
                 });
                 item.appendChild(btn);
             }
-            console.log(response);
         },
-        error: function(response) {
-            console.log(response);
+        error: function() {
+            alert("CONNECTION ERROR");
         }
     });
 };
@@ -64,50 +63,92 @@ function hideUserVideos(id, btn) {
 function showUserVideos(id, email, btn) {
     event.preventDefault();
 
-    var url = "../../api/api.php/find-user-videos/" + email;
+    var generalError = document.getElementById('generalError');
 
-    $.ajax({
-        type: "GET",
-        url: url,
-        success: function(response) {
-            if(!response.errors) {
-                var list = document.getElementById('li-' + id);
-                var vidList = document.createElement("ul");
-                vidList.id = "ul-" + id;
+    validateEmail(email, generalError);
+
+    if(!generalError.innerHTML) {
+        var url = "../../api/api.php/find-user-videos/" + email;
     
-                for(key in response.data) {
-                    var value = response.data[key];
-    
-                    var item = document.createElement('li');
-                    item.appendChild(document.createTextNode(value.name));
-                    vidList.appendChild(item);
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function(response) {
+                if(response.errors) {
+                    var generalError = document.getElementById('generalError');
+                    generalError.style.display = "block";
+                    generalError.innerText = "";
+                    for(key in response.errors) {
+                        generalError.innerText += response.errors[key] + "\n";
+                    }
+                } else {
+                    var list = document.getElementById('li-' + id);
+                    var vidList = document.createElement("ul");
+                    vidList.id = "ul-" + id;
+        
+                    for(key in response.data) {
+                        var value = response.data[key];
+        
+                        var item = document.createElement('li');
+                        item.appendChild(document.createTextNode(value.name));
+                        vidList.appendChild(item);
+                    }
+                    list.appendChild(vidList);
+                    btn.innerHTML = "Hide videos";
+                    btn.setAttribute("videos-hidden", "false");
                 }
-                list.appendChild(vidList);
-                btn.innerHTML = "Hide videos";
-                btn.setAttribute("videos-hidden", "false");
+            },
+            error: function() {
+                alert("CONNECTION ERROR");
             }
-            console.log(response);
-        },
-        error: function(response) {
-            console.log(response);
-        }
-    });
+        });
+    }
 };
 
 function removeUser(email) {
     event.preventDefault();
 
-    var url = "../../api/api.php/delete-user/" + email;
+    var generalError = document.getElementById('generalError');
 
-    $.ajax({
-        type: "DELETE",
-        url: url,
-        success: function(response) {
-            console.log(response);
-            location.reload(true);
-        },
-        error: function(response) {
-            console.log(response);
-        }
-    });
+    validateEmail(email, generalError);
+
+    if(!generalError.innerHTML) {
+        var url = "../../api/api.php/delete-user/" + email;
+    
+        $.ajax({
+            type: "DELETE",
+            url: url,
+            success: function(response) {
+                if(response.errors) {
+                    var generalError = document.getElementById('generalError');
+                    generalError.style.display = "block";
+                    generalError.innerText = "";
+                    for(key in response.errors) {
+                        generalError.innerText += response.errors[key] + "\n";
+                    }
+                } else {
+                    location.reload(true);
+                }
+            },
+            error: function() {
+                alert("CONNECTION ERROR");
+            }
+        });
+    }
 };
+
+function displayErrorField(field, fieldError, errorMessage) {
+    fieldError.innerHTML = errorMessage;
+    fieldError.style.display = "block";
+    field.value = "";
+}
+
+function validateEmail(email, emailError) {
+    var pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if(!pattern.test(email)) {
+        displayErrorField(email, emailError, "Email is invalid");
+    } else {
+        emailError.innerHTML = "";
+    }
+}
