@@ -34,9 +34,7 @@ TODO:
 •	Fix file (validation) validate/Validator.php    
 •	Fix file (create uploaded-video dir) api/video/create.php      
 •	Fix file (validation) api/image/erase.php   
-•	Fix file (validation) api/image/write.php   
-•	Fix file (comments) resources/css/style.css   
-•	Fix file (comments) resources/css/common.css    
+•	Fix file (validation) api/image/write.php     
 •	Fix file (validation, logging, handle errors) resources/js/user/*   
 •	Fix file (logging handle errors) resources/js/video/your-videos.js    
 •	Fix file (validation, logging handle errors, keyCodes) resources/js/video/edit-video.js   
