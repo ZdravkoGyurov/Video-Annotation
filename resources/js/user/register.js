@@ -5,16 +5,27 @@ form.addEventListener("submit", submitRegisterForm);
 function submitRegisterForm() {
     event.preventDefault();
 
-    var email = document.getElementById('email').value;
-    var name = document.getElementById('name').value;
-    var surname = document.getElementById('surname').value;
-    var password = document.getElementById('password').value;
-    var passwordRepeat = document.getElementById('passwordRepeat').value;
-    var formData = JSON.stringify({email:email, name:name, surname:surname, password:password, passwordRepeat:passwordRepeat});
+    var email = document.getElementById('email');
+    var name = document.getElementById('name');
+    var surname = document.getElementById('surname');
+    var password = document.getElementById('password');
+    var passwordRepeat = document.getElementById('passwordRepeat');
 
-    // validate fields
+    var emailError = document.getElementById('emailError');
+    var nameError = document.getElementById('nameError');
+    var surnameError = document.getElementById('surnameError');
+    var passwordError = document.getElementById('passwordError');
+    var passwordRepeatError = document.getElementById('passwordRepeatError');
 
-    if(true) { // no errors
+    validateEmail(email, emailError);
+    validateName(name, nameError);
+    validateSurname(surname, surnameError);
+    validatePassword(password, passwordError);
+    validatePasswordRepeat(password, passwordRepeat, passwordRepeatError);
+
+    if(!emailError.innerHTML && !nameError.innerHTML && !surnameError.innerHTML && !passwordError.innerHTML && !passwordRepeatError.innerHTML) {
+        var formData = JSON.stringify({email:email.value, name:name.value, surname:surname.value, password:password.value, passwordRepeat:passwordRepeat.value});
+
         $.ajax({
             type: "POST",
             url: "../../api/api.php/register",
@@ -22,14 +33,66 @@ function submitRegisterForm() {
             data: formData,
             success: function(response) {
                 if(response.errors) {
-                    console.log(response.errors);
+                    var generalError = document.getElementById('generalError');
+                    generalError.style.display = "block";
+                    generalError.innerText = "";
+                    for(key in response.errors) {
+                        generalError.innerText += response.errors[key] + "\n";
+                    }
                 } else {
                     location.replace("../user/login.php?register=true");
                 }
             },
-            error: function(response) {
-                console.log(response);
+            error: function() {
+                alert("CONNECTION ERROR");
             }
         });
     }
 };
+
+function displayErrorField(field, fieldError, errorMessage) {
+    fieldError.innerHTML = errorMessage;
+    fieldError.style.display = "block";
+    field.value = "";
+}
+
+function validateEmail(email, emailError) {
+    var pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!pattern.test(email.value)) {
+        displayErrorField(email, emailError, "Email is invalid");
+    } else {
+        emailError.innerHTML = "";
+    }
+}
+
+function validateName(name, nameError) {
+    if(name.value.length <= 0) {
+        displayErrorField(name, nameError, "Name is too short");
+    } else {
+        nameError.innerHTML = "";
+    }
+}
+
+function validateSurname(surname, surnameError) {
+    if(surname.value.length <= 0) {
+        displayErrorField(surname, surnameError, "Surname is too short");
+    } else {
+        surnameError.innerHTML = "";
+    }
+}
+
+function validatePassword(password, passwordError) {
+    if(password.value.length <= 0) {
+        displayErrorField(password, passwordError, "Password is too short");
+    } else {
+        passwordError.innerHTML = "";
+    }
+}
+
+function validatePasswordRepeat(password, passwordRepeat, passwordRepeatError) {
+    if(password.value != passwordRepeat.value) {
+        displayErrorField(passwordRepeat, passwordRepeatError, "Passwords don't match");
+    } else {
+        passwordRepeatError.innerHTML = "";
+    }
+}
