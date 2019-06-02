@@ -31,10 +31,5 @@ LOGGED IN AS ADMIN
 •	Log out (Model ✔ | View ✔ | Controller ✔)   
 
 TODO:   
-•	Fix file (validation, logging, handle errors) resources/js/user/*   
-•	Fix file (logging handle errors) resources/js/video/your-videos.js    
-•	Fix file (validation, logging handle errors, keyCodes) resources/js/video/edit-video.js   
-•	Fix file (validation, logging handle errors) resources/js/video/upload-video.js   
-•	Fix file (validation, logging handle errors) resources/js/video/video-video.js    
-•	Fix file (logging handle errors) resources/js/video/your-videos.js        
+•	Fix files (logging, handle errors, validation, keyCodes) resources/js/video/*    
 •	Fix file (upload_max_filesize / post_max_size) php.ini    
