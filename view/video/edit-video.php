@@ -1,5 +1,14 @@
-<?php $pageTitle = "VA | Edit video" ?>
-<?php include '../common/header.html' ?>
+<?php
+    if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
+        if($_COOKIE['loggedUserRole'] == 'Admin') {
+            header('Location: '.'..\\video\\all-videos.php');
+        }
+    } else {
+        header('Location: '.'..\\user\\login.php');
+    }
+?>
+<?php $pageTitle = "VA | Edit video"; ?>
+<?php include '../common/header.html'; ?>
 <link rel="stylesheet" href="../../resources/css/edit-video.css">
 <h1 id="page-header"></h1>
 <div id="image-modal">

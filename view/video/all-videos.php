@@ -1,5 +1,10 @@
-<?php $pageTitle = "VA | All videos" ?>
-<?php include '../common/header.html' ?>
+<?php
+    if(!isset($_COOKIE['loggedUserEmail']) || empty(isset($_COOKIE['loggedUserEmail']))) {
+        header('Location: '.'..\\user\\login.php');
+    }
+?>
+<?php $pageTitle = "VA | All videos"; ?>
+<?php include '../common/header.html'; ?>
 <link rel="stylesheet" href="../../resources/css/all-videos.css">
 <h1>All videos</h1>
 <ul id="list-all-videos">

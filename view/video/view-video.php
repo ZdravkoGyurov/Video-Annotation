@@ -1,5 +1,10 @@
-<?php $pageTitle = "VA | View video" ?>
-<?php include '../common/header.html' ?>
+<?php
+    if(!isset($_COOKIE['loggedUserEmail']) || empty(isset($_COOKIE['loggedUserEmail']))) {
+        header('Location: '.'..\\user\\login.php');
+    }
+?>
+<?php $pageTitle = "VA | View video"; ?>
+<?php include '../common/header.html'; ?>
 <link rel="stylesheet" href="../../resources/css/view-video.css">
 <h1 id="page-header"></h1>
 <div id="video-container">

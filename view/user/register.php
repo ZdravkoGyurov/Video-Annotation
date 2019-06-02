@@ -1,5 +1,14 @@
-<?php $pageTitle = "VA | Register" ?>
-<?php include '../common/header.html' ?>
+<?php
+    if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
+        if($_COOKIE['loggedUserRole'] == 'User') {
+            header('Location: '.'..\\video\\all-videos.php');
+        } else {
+            header('Location: '.'..\\video\\all-videos.php');
+        }
+    }
+?>
+<?php $pageTitle = "VA | Register"; ?>
+<?php include '../common/header.html'; ?>
 <link rel="stylesheet" href="../../resources/css/register.css">
 <form id="registerForm">
     <h1>Register</h1>

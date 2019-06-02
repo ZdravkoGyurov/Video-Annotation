@@ -1,5 +1,14 @@
-<?php $pageTitle = "VA | Upload video" ?>
-<?php include '../common/header.html' ?>
+<?php
+    if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
+        if($_COOKIE['loggedUserRole'] == 'Admin') {
+            header('Location: '.'..\\video\\all-videos.php');
+        }
+    } else {
+        header('Location: '.'..\\user\\login.php');
+    }
+?>
+<?php $pageTitle = "VA | Upload video"; ?>
+<?php include '../common/header.html'; ?>
 <link rel="stylesheet" href="../../resources/css/upload-video.css">
 <h1>Upload video</h1>
 <form enctype="multipart/form-data" id="uploadFileForm" >
