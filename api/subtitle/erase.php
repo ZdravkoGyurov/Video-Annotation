@@ -13,7 +13,10 @@
             if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
                 $errors = array();
 
-                // validate fields
+                Validator::validateSubtitleText($data->subtitleText, $errors);
+                Validator::validateVideoId($data->videoId, $errors);
+                Validator::validateUserId($data->videoUserId, $errors);
+
                 $user->findUserByEmail($_COOKIE['loggedUserEmail']);
 
                 if($user->roleName == 'User' && $user->id == $data->videoUserId) {
@@ -65,7 +68,7 @@
                 ));
             }
         } else {
-            $errors['dataIncompleteError'] = 'Cannot find image! Data is incomplete!';
+            $errors['dataIncompleteError'] = 'Data is incomplete!';
             echo json_encode(array(
                 'errors' => $errors
             ));

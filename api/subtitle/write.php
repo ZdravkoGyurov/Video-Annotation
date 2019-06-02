@@ -13,7 +13,12 @@
             if(isset($_COOKIE['loggedUserEmail']) && !empty(isset($_COOKIE['loggedUserEmail']))) {
                 $errors = array();
 
-                // validate fields
+                Validator::validateStartTime($data->startTime, $errors);
+                Validator::validateEndTime($data->endTime, $errors);
+                Validator::validateAnnotation($data->annotation, $errors);
+                Validator::validateVideoId($data->videoId, $errors);
+                Validator::validateUserId($data->videoUserId, $errors);
+
                 $user->findUserByEmail($_COOKIE['loggedUserEmail']);
     
                 if($user->roleName == 'User' && $user->id == $data->videoUserId) {
