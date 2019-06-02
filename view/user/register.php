@@ -12,20 +12,26 @@
 <link rel="stylesheet" href="../../resources/css/register.css">
 <form id="registerForm">
     <h1>Register</h1>
+    <p id="generalError" class="error"></p>
 
     <label for="email">Email</label>
+    <p id="emailError" class="error"></p>
     <input id="email" type="email" placeholder="Email">
 
     <label for="name">Name</label>
+    <p id="nameError" class="error"></p>
     <input id="name" type="text" placeholder="Name">
 
     <label for="surname">Surname</label>
+    <p id="surnameError" class="error"></p>
     <input id="surname" type="text" placeholder="Surname">
 
     <label for="password">Password</label>
+    <p id="passwordError" class="error"></p>
     <input id="password" type="password" placeholder="Password">
 
     <label for="passwordRepeat">Repeat password</label>
+    <p id="passwordRepeatError" class="error"></p>
     <input id="passwordRepeat" type="password" placeholder="Repeat password">
 
     <p>Forgot password?<a class="small-links" href="restore-password.php">Click here.</a></p>
