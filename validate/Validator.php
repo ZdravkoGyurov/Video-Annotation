@@ -61,4 +61,36 @@
                 $errors['videoTimestampError'] = 'Timestamp can contain only numbers';
             }
         }
+
+        public static function validateUserId($userId, &$errors) {
+            if(!is_numeric($userId)) {
+                $errors['userIdError'] = 'User id can contain only numbers';
+            }
+        }
+
+        public static function validateAnnotation($annotation, &$errors) {
+            if(strlen($annotation) <= 0) {
+                $errors['annotationError'] = 'Annotation is empty';
+            }
+        }
+
+        public static function validateStartTime($startTime, &$errors) {
+            $pattern = '/[a-zA-Z]/';
+            if(preg_match($pattern, $startTime)) {
+                $errors['startTimeError'] = 'Start time is invalid';
+            }
+        }
+
+        public static function validateEndTime($endTime, &$errors) {
+            $pattern = '/[a-zA-Z]/';
+            if(preg_match($pattern, $endTime)) {
+                $errors['endTimeError'] = 'End time is invalid';
+            }
+        }
+
+        public static function validateSubtitleText($subtitleText, &$errors) {
+            if(strlen($subtitleText) <= 0) {
+                $errors['subtitleTextError'] = 'Subtitle text is empty';
+            }
+        }
     }
