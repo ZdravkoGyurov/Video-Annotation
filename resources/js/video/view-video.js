@@ -31,8 +31,6 @@ video.addEventListener("loadedmetadata", function() {
 
 document.addEventListener("DOMContentLoaded", function(){
     loadVideo();
-    imageModal.style.display = "none";
-    subtitleModal.style.display = "none";
 });
 
 function loadVideo() {
