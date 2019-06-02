@@ -12,11 +12,14 @@
 <link rel="stylesheet" href="../../resources/css/login.css">
 <form id="loginForm">
     <h1>Login</h1>
+    <p id="generalError" class="error"></p>
 
     <label for="email">Email</label>
+    <p id="emailError" class="error"></p>
     <input id="email" type="email" placeholder="Email">
 
     <label for="password">Password</label>
+    <p id="passwordError" class="error"></p>
     <input id="password" type="password" placeholder="Password">
 
     <p>Don't have an account?<a class="small-links" href="register.php">Click here.</a></p>
