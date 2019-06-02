@@ -104,7 +104,7 @@ function removeUser(email) {
         url: url,
         success: function(response) {
             console.log(response);
-            location.reload();
+            location.reload(true);
         },
         error: function(response) {
             console.log(response);

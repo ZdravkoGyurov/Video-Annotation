@@ -110,7 +110,7 @@ saveImageBtn.addEventListener("click", function() {
             if(response.errors) {
                 console.log(response.errors);
             } else {
-                location.reload();
+                location.reload(true);
             }
         },
         error: function(response) {
@@ -143,7 +143,7 @@ saveSubtitleBtn.addEventListener("click", function() {
             if(response.errors) {
                 console.log(response.errors);
             } else {
-                location.reload();
+                location.reload(true);
             }
         },
         error: function(response) {
@@ -383,7 +383,7 @@ function deleteImage(timestamp, videoId) {
             if(response.errors) {
                 console.log(response.errors);
             } else {
-                location.reload();
+                location.reload(true);
             }
         },
         error: function(response) {
@@ -413,7 +413,7 @@ function deleteSubtitle() {
             if(response.errors) {
                 console.log(response.errors);
             } else {
-                // location.reload();
+                location.reload(true);
                 console.log(response);
             }
         },

@@ -25,7 +25,7 @@ function submitLoginForm() {
                 }
             },
             error: function(response) {
-                location.reload();
+                location.reload(true);
                 console.log(response);
             }
         });

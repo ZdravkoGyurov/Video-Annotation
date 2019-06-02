@@ -37,6 +37,7 @@ uploadFileForm.addEventListener("submit", function(e) {
                     window.location.href = urlWithoutParameters + "?uploaded=true";
                 }
             } else {
+                console.log(response);
                 if(document.getElementById("success-message")) {
                     document.getElementById("success-message").remove();
                 }

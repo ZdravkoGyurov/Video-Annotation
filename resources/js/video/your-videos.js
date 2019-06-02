@@ -76,7 +76,7 @@ function removeVideo(name) {
                     var urlWithoutParameters = window.location.href.substring(0, window.location.href.indexOf('?'));
                     window.location.href = urlWithoutParameters + "?deleted=" + name;
                 } else {
-                    location.reload();
+                    location.reload(true);
                 }
             } else {
                 if(!document.getElementById("fail-message")) {
