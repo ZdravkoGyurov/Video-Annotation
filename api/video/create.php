@@ -31,6 +31,9 @@
                             define("userIdDB", $user->id);
 
                             if($video->createVideo(pathDB, nameDB, typeDB, userIdDB)) {
+                                if(!file_exists(substr(getcwd(), 0, -3).'uploaded-videos')) {
+                                    mkdir(substr(getcwd(), 0, -3).'uploaded-videos');
+                                }
                                 if(move_uploaded_file($sourcePath, $targetPath)) {
                                     mkdir(substr(getcwd(), 0, -3).'uploaded-videos\\'.$fileNamePure);
                                     $video->findVideoByName(nameDB);
