@@ -31,9 +31,6 @@ LOGGED IN AS ADMIN
 •	Log out (Model ✔ | View ✔ | Controller ✔)   
 
 TODO:   
-•	Fix file (validation) validate/Validator.php      
-•	Fix file (validation) api/image/erase.php   
-•	Fix file (validation) api/image/write.php     
 •	Fix file (validation, logging, handle errors) resources/js/user/*   
 •	Fix file (logging handle errors) resources/js/video/your-videos.js    
 •	Fix file (validation, logging handle errors, keyCodes) resources/js/video/edit-video.js   
