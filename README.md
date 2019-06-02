@@ -44,4 +44,3 @@ TODO:
 •	Fix file (validation, logging handle errors) resources/js/video/video-video.js    
 •	Fix file (logging handle errors) resources/js/video/your-videos.js        
 •	Fix file (upload_max_filesize / post_max_size) php.ini    
-•	Fix subtitle reload   
