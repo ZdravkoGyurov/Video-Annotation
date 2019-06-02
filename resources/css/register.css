@@ -77,3 +77,10 @@ p {
     font-size: 20px;
     font-style: italic;
 }
+
+.error {
+    display: none;
+    color: rgba(255, 70, 70, 0.8);
+    font-weight: normal;
+    font-size: 20px;
+}
