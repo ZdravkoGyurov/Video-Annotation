@@ -9,37 +9,45 @@ function showAllVideos() {
         type: "GET",
         url: "../../api/api.php/all-videos",
         success: function(response) {
-            var list = document.getElementById('list-all-videos');
-            for(key in response.data) {
-                var value = response.data[key];
-
-                var item = document.createElement('li');
-                var link = document.createElement('a');
-                link.appendChild(document.createTextNode(value.name));
-                link.href = "../video/view-video.php?videoName=" + value.name;
-                link.className = "video-link";
-                item.appendChild(link);
-                list.appendChild(item);
-
-                var decodedCookieRole = decodeURIComponent(getCookie('loggedUserRole'));
-
-                if(decodedCookieRole == "Admin") {
-                    var btn = document.createElement('button');
-                    btn.id = "btn-" + value.id;
-                    btn.innerHTML = "Delete";
-                    btn.setAttribute("name", value.name)
-                    btn.addEventListener("click", function(e)  {
-                        if(e.target && e.target.id.startsWith("btn-")) {
-                            removeVideo(e.target.getAttribute("name"));
-                        }
-                    });
-                    item.appendChild(btn);
+            if(response.errors) {
+                var generalError = document.getElementById('generalError');
+                generalError.style.display = "block";
+                generalError.innerText = "";
+                for(key in response.errors) {
+                    generalError.innerText += response.errors[key] + "\n";
+                }
+            } else {
+                var list = document.getElementById('list-all-videos');
+                for(key in response.data) {
+                    var value = response.data[key];
+    
+                    var item = document.createElement('li');
+                    var link = document.createElement('a');
+                    link.appendChild(document.createTextNode(value.name));
+                    link.href = "../video/view-video.php?videoName=" + value.name;
+                    link.className = "video-link";
+                    item.appendChild(link);
+                    list.appendChild(item);
+    
+                    var decodedCookieRole = decodeURIComponent(getCookie('loggedUserRole'));
+    
+                    if(decodedCookieRole == "Admin") {
+                        var btn = document.createElement('button');
+                        btn.id = "btn-" + value.id;
+                        btn.innerHTML = "Delete";
+                        btn.setAttribute("name", value.name)
+                        btn.addEventListener("click", function(e)  {
+                            if(e.target && e.target.id.startsWith("btn-")) {
+                                removeVideo(e.target.getAttribute("name"));
+                            }
+                        });
+                        item.appendChild(btn);
+                    }
                 }
             }
-            console.log(response);
         },
-        error: function(response) {
-            console.log(response);
+        error: function() {
+            alert("CONNECTION ERROR");
         }
     });
 };
@@ -71,8 +79,8 @@ function removeVideo(name) {
                 }
             }
         },
-        error: function(response) {
-            console.log(response);
+        error: function() {
+            alert("CONNECTION ERROR");
         }
     });
 };
