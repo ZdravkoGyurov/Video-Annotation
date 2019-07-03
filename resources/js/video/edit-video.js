@@ -108,13 +108,18 @@ saveImageBtn.addEventListener("click", function() {
         processData: false,
         success: function(response) {
             if(response.errors) {
-                console.log(response.errors);
+                var generalError = document.getElementById('generalError');
+                generalError.style.display = "block";
+                generalError.innerText = "";
+                for(key in response.errors) {
+                    generalError.innerText += response.errors[key] + "\n";
+                }
             } else {
                 location.reload(true);
             }
         },
-        error: function(response) {
-            console.log(response);
+        error: function() {
+            alert("CONNECTION ERROR");
         }
     });
 
@@ -131,25 +136,39 @@ saveSubtitleBtn.addEventListener("click", function() {
     var startTimeFormatted = startTime.toHHMMSS() + startTime.substr(startTime.length - 4);
     var endTimeFormatted = endTime.toHHMMSS() + endTime.substr(endTime.length - 4);
     var annotation = document.getElementById("input-subtitle-annotation").value;
-    var formData = JSON.stringify({startTime:startTimeFormatted, endTime:endTimeFormatted, annotation:annotation, videoId:videoIdForForm, videoUserId:videoUserIdForForm});
-    console.log(formData);
-
-    $.ajax({
-        type: "POST",
-        url: "../../api/api.php/write-subtitle",
-        dataType: "json",
-        data: formData,
-        success: function(response) {
-            if(response.errors) {
-                console.log(response.errors);
-            } else {
-                location.reload(true);
+    
+    var captionSubtitleError = document.getElementById('captionSubtitleError');
+    
+    validateStartTime(startTimeFormatted, captionSubtitleError);
+    validateEndTime(endTimeFormatted, captionSubtitleError);
+    validateAnnotation(annotation, captionSubtitleError);
+    validateVideoId(videoIdForForm, captionSubtitleError);
+    validateUserId(videoUserIdForForm, captionSubtitleError);
+    
+    if(!captionSubtitleError.innerHTML) {
+        var formData = JSON.stringify({startTime:startTimeFormatted, endTime:endTimeFormatted, annotation:annotation, videoId:videoIdForForm, videoUserId:videoUserIdForForm});
+        
+        $.ajax({
+            type: "POST",
+            url: "../../api/api.php/write-subtitle",
+            dataType: "json",
+            data: formData,
+            success: function(response) {
+                if(response.errors) {
+                    captionSubtitleError.style.display = "block";
+                    captionSubtitleError.innerText = "";
+                    for(key in response.errors) {
+                        captionSubtitleError.innerText += response.errors[key] + "\n";
+                    }
+                } else {
+                    location.reload(true);
+                }
+            },
+            error: function() {
+                alert("CONNECTION ERROR");
             }
-        },
-        error: function(response) {
-            console.log(response);
-        }
-    });
+        });
+    }
 });
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -164,16 +183,21 @@ function loadVideo() {
     var videoName = url.searchParams.get("videoName");
     var urlForAJax = "../../api/api.php/find-video/" + videoName;
 
-    // validate video name
+    var generalError = document.getElementById('generalError');
 
-    if(true) { // no errors
+    validateVideoName(videoName, generalError);
+
+    if(!generalError.innerHTML) {
         $.ajax({
             type: "GET",
             url: urlForAJax,
             success: function(response) {
-                console.log(response);
                 if(response.errors) {
-                    console.log(response.errors);
+                    generalError.style.display = "block";
+                    generalError.innerText = "";
+                    for(key in response.errors) {
+                        generalError.innerText += response.errors[key] + "\n";
+                    }
                 } else {
                     var subtitlesParts = response.subtitle.path.split("\\");
                     subtitleSrc = "..\\..\\uploaded-videos\\" + response.video.name + "\\" + subtitlesParts[subtitlesParts.length - 1];
@@ -252,8 +276,8 @@ function loadVideo() {
                     }
                 }
             },
-            error: function(response) {
-                console.log(response);
+            error: function() {
+                alert("CONNECTION ERROR");
             }
         });
     }
@@ -372,24 +396,36 @@ video.addEventListener("timeupdate", function() {
 function deleteImage(timestamp, videoId) {
     event.preventDefault();
 
-    var formData = JSON.stringify({videoId:videoId, timestamp:timestamp});
-
-    $.ajax({
-        type: "DELETE",
-        url: "../../api/api.php/delete-image",
-        dataType: "json",
-        data: formData,
-        success: function(response) {
-            if(response.errors) {
-                console.log(response.errors);
-            } else {
-                location.reload(true);
+    var generalError = document.getElementById('generalError');
+    
+    validateVideoId(videoId, generalError);
+    validateTimestamp(timestamp, generalError);
+    
+    if(!generalError.innerHTML) {
+        var formData = JSON.stringify({videoId:videoId, timestamp:timestamp});
+        
+        $.ajax({
+            type: "DELETE",
+            url: "../../api/api.php/delete-image",
+            dataType: "json",
+            data: formData,
+            success: function(response) {
+                if(response.errors) {
+                    var generalError = document.getElementById('generalError');
+                    generalError.style.display = "block";
+                    generalError.innerText = "";
+                    for(key in response.errors) {
+                        generalError.innerText += response.errors[key] + "\n";
+                    }
+                } else {
+                    location.reload(true);
+                }
+            },
+            error: function() {
+                alert("CONNECTION ERROR");
             }
-        },
-        error: function(response) {
-            console.log(response);
-        }
-    });
+        });
+    }
 }
 
 var deleteSubtitleBtn = document.getElementById("delete-subtitle-button");
@@ -402,23 +438,127 @@ function deleteSubtitle() {
 
     var subtitleText = document.getElementById("delete-subtitle-text-input").value;
     
-    var formData = JSON.stringify({subtitleText:subtitleText, videoId:videoIdForForm, videoUserId:videoUserIdForForm});
+    var generalError = document.getElementById('generalError');
 
-    $.ajax({
-        type: "POST",
-        url: "../../api/api.php/erase-subtitle",
-        dataType: "json",
-        data: formData,
-        success: function(response) {
-            if(response.errors) {
-                console.log(response.errors);
-            } else {
-                location.reload(true);
-                console.log(response);
+    validateSubtitleText(subtitleText, generalError);
+    validateVideoId(videoIdForForm, generalError);
+    validateUserId(videoUserIdForForm, generalError);
+    
+    if(!generalError.innerHTML) {
+        var formData = JSON.stringify({subtitleText:subtitleText, videoId:videoIdForForm, videoUserId:videoUserIdForForm});
+        
+        $.ajax({
+            type: "POST",
+            url: "../../api/api.php/erase-subtitle",
+            dataType: "json",
+            data: formData,
+            success: function(response) {
+                if(response.errors) {
+                    var generalError = document.getElementById('generalError');
+                    generalError.style.display = "block";
+                    generalError.innerText = "";
+                    for(key in response.errors) {
+                        generalError.innerText += response.errors[key] + "\n";
+                    }
+                } else {
+                    location.reload(true);
+                }
+            },
+            error: function() {
+                alert("CONNECTION ERROR");
             }
-        },
-        error: function(response) {
-            console.log(response);
+        });
+    }
+}
+
+function validateStartTime(startTimeFormatted, captionSubtitleError) {
+    var pattern = /[0-9]{2}:[0-9]{2}:[0-9]{2}/;
+    if(!pattern.test(startTimeFormatted)) {
+        if(!captionSubtitleError.innerText.includes("Time format for start time is invalid")) {
+            captionSubtitleError.innerText += "Time format for start time is invalid\n";
         }
-    });
+        captionSubtitleError.style.display = "block";
+    } else {
+        captionSubtitleError.innerText = captionSubtitleError.innerText.replace("Time format for start time is invalid\n", "");
+    }
+}
+
+function validateEndTime(endTimeFormatted, captionSubtitleError) {
+    var pattern = /[0-9]{2}:[0-9]{2}:[0-9]{2}/;
+    if(!pattern.test(endTimeFormatted)) {
+        if(!captionSubtitleError.innerText.includes("Time format for end time is invalid")) {
+            captionSubtitleError.innerText += "Time format for end time is invalid\n";
+        }
+        captionSubtitleError.style.display = "block";
+    } else {
+        captionSubtitleError.innerText = captionSubtitleError.innerText.replace("Time format for end time is invalid\n", "");
+    }
+}
+
+function validateAnnotation(annotation, captionSubtitleError) {
+    if(annotation.length <= 0) {
+        if(!captionSubtitleError.innerText.includes("Annotation is empty")) {
+            captionSubtitleError.innerText += "Annotation is empty\n";
+        }
+        captionSubtitleError.style.display = "block";
+    } else {
+        captionSubtitleError.innerText = captionSubtitleError.innerText.replace("Annotation is empty\n", "");
+    }
+}
+
+function validateVideoId(videoIdForForm, captionSubtitleError) {
+    if(!/^\d+$/.test(videoIdForForm)) {
+        if(!captionSubtitleError.innerText.includes("Video id can contain only numbers")) {
+            captionSubtitleError.innerText += "Video id can contain only numbers\n";
+        }
+        captionSubtitleError.style.display = "block";
+    } else {
+        captionSubtitleError.innerText = captionSubtitleError.innerText.replace("Video id can contain only numbers\n", "");
+    }
+}
+
+function validateUserId(videoUserIdForForm, captionSubtitleError) {
+    if(!/^\d+$/.test(videoIdForForm)) {
+        if(!captionSubtitleError.innerText.includes("User id can contain only numbers")) {
+            captionSubtitleError.innerText += "User id can contain only numbers\n";
+        }
+        captionSubtitleError.style.display = "block";
+    } else {
+        captionSubtitleError.innerText = captionSubtitleError.innerText.replace("User id can contain only numbers\n", "");
+    }
+}
+
+function validateVideoName(videoName, generalError) {
+    var pattern = /^[a-z0-9]+$/;
+    if(pattern.test(videoName)) {
+        if(!generalError.innerText.includes("Video name can contain only letters and numbers")) {
+            generalError.innerText += "Video name can contain only letters and numbers\n";
+        }
+        generalError.style.display = "block";
+    } else {
+        generalError.innerText = generalError.innerText.replace("Video name can contain only letters and numbers\n", "");
+    }
+}
+
+function validateTimestamp(timestamp, generalError) {
+    var pattern = /[a-z]/;
+    if(pattern.test(timestamp)) {
+        if(!generalError.innerText.includes("Timestamp cannot contain letters")) {
+            generalError.innerText += "Timestamp cannot contain letters\n";
+        }
+        generalError.style.display = "block";
+    } else {
+        generalError.innerText = generalError.innerText.replace("Timestamp cannot contain letters\n", "");
+    }
+}
+
+function validateSubtitleText(subtitleText, generalError) {
+    if(subtitleText.length <= 0) {
+        if(!generalError.innerText.includes("Subtitle text is empty")) {
+            generalError.innerText += "Subtitle text is empty\n";
+        }
+        generalError.style.display = "block";
+    } else {
+        generalError.innerText = generalError.innerText.replace("Subtitle text is empty\n", "");
+    }
 }
