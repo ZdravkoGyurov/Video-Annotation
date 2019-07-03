@@ -11,6 +11,7 @@
 <?php include '../common/header.html'; ?>
 <link rel="stylesheet" href="../../resources/css/edit-video.css">
 <h1 id="page-header"></h1>
+<p id="generalError" class="error"></p>
 <div id="image-modal">
     <div id="image-modal-content">
         <i id="image-modal-close-btn" class="fas fa-times close-modal"></i>
@@ -30,6 +31,7 @@
 <div id="subtitle-modal">
     <div id="subtitle-modal-content">
         <i id="subtitle-modal-close-btn" class="fas fa-times close-modal"></i>
+        <p id="captionSubtitleError" class="error"></p>
         <canvas id="sub-canvas"></canvas>
         <form id="submitSubtitleForm">
             <span id="label-subtitle-current-time"></span>
