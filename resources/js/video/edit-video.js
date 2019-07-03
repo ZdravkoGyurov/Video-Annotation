@@ -200,7 +200,7 @@ function loadVideo() {
                     }
                 } else {
                     var subtitlesParts = response.subtitle.path.split("\\");
-                    subtitleSrc = "..\\..\\uploaded-videos\\" + response.video.name + "\\" + subtitlesParts[subtitlesParts.length - 1];
+                    subtitleSrc = "..\\..\\uploaded-videos\\" + response.video.name + "\\" + subtitlesParts[subtitlesParts.length - 1] + "?rnd" + (new Date().valueOf());
 
                     videoIdForForm = response.video.id;
                     videoUserIdForForm = response.video.userId;
