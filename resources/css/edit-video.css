@@ -427,3 +427,12 @@ video::cue {
 #delete-subtitle-button:active {
     transform: translateY(2px);
 }
+
+.error {
+    transform: translateY(35px);
+    display: none;
+    color: rgba(255, 70, 70, 0.8);
+    font-weight: normal;
+    font-size: 20px;
+    text-align: center;
+}
