@@ -7,6 +7,7 @@
 <?php include '../common/header.html'; ?>
 <link rel="stylesheet" href="../../resources/css/view-video.css">
 <h1 id="page-header"></h1>
+<p id="generalError" class="error"></p>
 <div id="video-container">
     <div id="c-video">
         <video id="video" src=""></video>
