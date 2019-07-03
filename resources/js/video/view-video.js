@@ -39,16 +39,21 @@ function loadVideo() {
     var videoName = url.searchParams.get("videoName");
     var urlForAJax = "../../api/api.php/find-video/" + videoName;
 
-    // validate video name
+    var generalError = document.getElementById('generalError');
 
-    if(true) { // no errors
+    validateVideoName(videoName, generalError);
+
+    if(!generalError.innerHTML) {
         $.ajax({
             type: "GET",
             url: urlForAJax,
             success: function(response) {
-                console.log(response);
                 if(response.errors) {
-                    console.log(response.errors);
+                    generalError.style.display = "block";
+                    generalError.innerText = "";
+                    for(key in response.errors) {
+                        generalError.innerText += response.errors[key] + "\n";
+                    }
                 } else {
                     var subtitlesParts = response.subtitle.path.split("\\");
                     subtitleSrc = "..\\..\\uploaded-videos\\" + response.video.name + "\\" + subtitlesParts[subtitlesParts.length - 1];
@@ -117,8 +122,8 @@ function loadVideo() {
                     }
                 }
             },
-            error: function(response) {
-                console.log(response);
+            error: function() {
+                alert("CONNECTION ERROR");
             }
         });
     }
@@ -226,3 +231,15 @@ video.onloadeddata = function() {
 video.addEventListener("timeupdate", function() {
     currentTimeDisplay.innerHTML = video.currentTime.toString().toHHMMSS() + " / " + video.duration.toString().toHHMMSS();
 });
+
+function validateVideoName(videoName, generalError) {
+    var pattern = /^[a-z0-9]+$/;
+    if(pattern.test(videoName)) {
+        if(!generalError.innerText.includes("Video name can contain only letters and numbers")) {
+            generalError.innerText += "Video name can contain only letters and numbers\n";
+        }
+        generalError.style.display = "block";
+    } else {
+        generalError.innerText = generalError.innerText.replace("Video name can contain only letters and numbers\n", "");
+    }
+}
